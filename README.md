@@ -1,19 +1,24 @@
-# [MDA] Mr.Fork
+# README
 
-### Tecnología Back-End utilizadas
-- Ruby version: 2.4.1p111
-- Rails version: 5.1.4
-- Ruby On Rails
-	- Erb para las vistas
-	- Gema devise para el login
-	- Sqlite3 para bases de datos
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-### Tecnologías Front-End Utilizadas
-- HTML5
-- CSS3
-	- Bootstrap 3
-	- SCSS
-- Javascript
-	- JQuery
+Things you may want to cover:
 
-### Realizado por: Sarah, Cynthia, Tomás, Jorge, Miguel y Alejandro
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
