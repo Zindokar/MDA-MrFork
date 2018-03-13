@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  weekDay: MyString
+  openingTime: 2018-03-13 13:32:02
+  closingTime: 2018-03-13 13:32:02
+
+two:
+  weekDay: MyString
+  openingTime: 2018-03-13 13:32:02
+  closingTime: 2018-03-13 13:32:02
