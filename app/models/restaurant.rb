@@ -4,4 +4,6 @@ class Restaurant < ApplicationRecord
   has_many :schedules
   has_many :galleries
   has_many :reserves
+
+  mount_uploader :image, ImageUploader
 end

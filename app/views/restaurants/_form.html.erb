@@ -21,6 +21,11 @@
     <%= form.text_field :location, id: :restaurant_location %>
   </div>
 
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image, id: :restaurant_image %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
