@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  resources :addresses
+  resources :searches
   resources :galleries
   resources :schedules
   resources :reserves

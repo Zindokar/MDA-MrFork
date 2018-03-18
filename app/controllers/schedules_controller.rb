@@ -12,7 +12,7 @@ class SchedulesController < ApplicationController
   def show
   end
 
-  # GET /schedules/new
+  # GET /schedules/index
   def new
     @schedule = Schedule.new
   end

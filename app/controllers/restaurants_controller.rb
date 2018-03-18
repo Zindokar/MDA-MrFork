@@ -12,7 +12,7 @@ class RestaurantsController < ApplicationController
   def show
   end
 
-  # GET /restaurants/new
+  # GET /restaurants/index
   def new
     @restaurant = Restaurant.new
   end

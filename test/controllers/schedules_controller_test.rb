@@ -10,7 +10,7 @@ class SchedulesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
+  test "should get index" do
     get new_schedule_url
     assert_response :success
   end

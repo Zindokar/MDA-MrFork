@@ -12,7 +12,7 @@ class ReservesController < ApplicationController
   def show
   end
 
-  # GET /reserves/new
+  # GET /reserves/index
   def new
     @reserf = Reserve.new
   end

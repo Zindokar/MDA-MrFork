@@ -12,7 +12,7 @@ class DishesController < ApplicationController
   def show
   end
 
-  # GET /dishes/new
+  # GET /dishes/index
   def new
     @dish = Dish.new
   end

@@ -12,7 +12,7 @@ class GalleriesController < ApplicationController
   def show
   end
 
-  # GET /galleries/new
+  # GET /galleries/index
   def new
     @gallery = Gallery.new
   end

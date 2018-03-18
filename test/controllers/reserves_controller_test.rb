@@ -10,7 +10,7 @@ class ReservesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
+  test "should get index" do
     get new_reserf_url
     assert_response :success
   end

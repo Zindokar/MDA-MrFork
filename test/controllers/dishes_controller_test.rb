@@ -10,7 +10,7 @@ class DishesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
+  test "should get index" do
     get new_dish_url
     assert_response :success
   end
