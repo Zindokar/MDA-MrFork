@@ -63,3 +63,11 @@ s = Schedule.create [{weekDay: "lunes", openingTime: Time.zone.parse('2018-01-01
 reserves = Reserve.create [{personCount: 5, restaurant_id: 1},
                            {personCount: 2, restaurant_id: 2},
                            {personCount: 15, restaurant_id: 5}]
+
+addresses = Address.create [{street: "Batalla del Ebro, 39", city: "Las Palmas", postalCode: "35013", restaurant_id: 1},
+                            {street: "GC-800, 11", city: "Las Palmas", postalCode: "35229", restaurant_id: 2},
+                            {street: "Carretera de Marzagán, 50", city: "Las Palmas", postalCode: "35226", restaurant_id: 3},
+                            {street: "Pintor Pepe Dámaso, 12", city: "Tamaraceite", postalCode: "35018", restaurant_id: 4},
+                            {street: "Camino finca La Palma s/n", city: "Valsequillo", postalCode: "35217", restaurant_id: 5},
+                            {street: "León y Castillo, 7", city: "Arucas", postalCode: "35400", restaurant_id: 6},
+                            {street: "Secundino Delgado, 5", city: "San Bartolomé de Tirajana", postalCode: "35290", restaurant_id: 7}]
