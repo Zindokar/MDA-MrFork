@@ -1,0 +1,20 @@
+<style type="text/css">
+ #closed     { color: red;     }
+ #orange     { color: orange;  }
+ #opened     { color: green;   }
+</style>
+
+<b>Name: </b><%= name %> <br>
+<% if @openingTime < Time.now && @closingTime > Time.now%>
+  <b>Estado:</b> <span id="opened"> ¡Abierto! </span><br>
+<% else %>
+  <b>Estado:</b> <span id="closed"> CERRADO</span> <br>
+<%end%>
+<% if @punctuation < 4 %>
+  <b>Opinión: </b> <span id="closed"> <%= @punctuation.to_s %> </span> <br>
+<% elsif @punctuation < 7 %>
+  <b>Opinión: </b> <span id="orange"> <%=  @punctuation.to_s %> </span> <br>
+<% else %>
+  <b>Opinión: </b> <span id="opened"> <%=  @punctuation.to_s %> </span> <br>
+  <%end%>
+  <b>Horario: <%= @openingTime + '--' + @closingTime %></b>
