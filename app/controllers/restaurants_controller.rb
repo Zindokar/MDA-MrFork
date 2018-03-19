@@ -4,6 +4,8 @@ class RestaurantsController < ApplicationController
   # GET /restaurants
   # GET /restaurants.json
   def index
+    load_restaurants
+
     @restaurants = Restaurant.all
   end
 
@@ -70,5 +72,23 @@ class RestaurantsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def restaurant_params
       params.require(:restaurant).permit(:name, :location)
+    end
+
+    def load_restaurants
+      @restaurants_default = Gmaps4rails.build_markers(Restaurant.all) do |plot, marker|
+        marker.lat plot.location[0,plot.location.index(',')-1].to_f
+        marker.lng plot.location[plot.location.index(',')+1,plot.location.length].to_f
+
+        @status = rand(1..2)
+        @openingTime = rand(10..13).to_s  + ":00 am"
+        @closingTime = rand(20..24).to_s + ":00 pm"
+        @punctuation = rand(4..10)
+
+
+
+
+          marker.infowindow render_to_string(:partial => "/restaurants/info",
+            :locals => {:name => plot.name, :openingTime => @openingTime, :closingTime => @closingTime, :punctuation => @punctuation })
+        end
     end
 end
