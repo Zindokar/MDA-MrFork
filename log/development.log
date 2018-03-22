@@ -1985,3 +1985,56 @@ Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.0ms)
 
 
   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-03-22 19:48:41 +0100
+Processing by Devise::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/sessions/new.html.erb within layouts/application (78.4ms)
+Completed 500 Internal Server Error in 94ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionView::Template::Error (undefined method `session_path' for #<#<Class:0x00000003f2c350>:0x00000003f28700>
+Did you mean?  session):
+    1: <h2>Log in</h2>
+    2: 
+    3: <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    4:   <div class="field">
+    5:     <%= f.label :email %><br />
+    6:     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  
+app/views/users/sessions/new.html.erb:3:in `_app_views_users_sessions_new_html_erb___3056042913084210973_33109340'
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-03-22 19:48:44 +0100
+Processing by Devise::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/sessions/new.html.erb within layouts/application (77.3ms)
+Completed 500 Internal Server Error in 80ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `session_path' for #<#<Class:0x00000003f2c350>:0x0000000429d138>
+Did you mean?  session):
+    1: <h2>Log in</h2>
+    2: 
+    3: <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    4:   <div class="field">
+    5:     <%= f.label :email %><br />
+    6:     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  
+app/views/users/sessions/new.html.erb:3:in `_app_views_users_sessions_new_html_erb___3056042913084210973_34897100'
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-03-22 19:49:00 +0100
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (0.9ms)
+  Rendered users/sessions/new.html.erb within layouts/application (16.3ms)
+Completed 200 OK in 146ms (Views: 128.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-03-22 19:53:58 +0100
+Processing by Users::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (1.7ms)
+  Rendered users/sessions/new.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 51ms (Views: 30.0ms | ActiveRecord: 0.9ms)
+
+
