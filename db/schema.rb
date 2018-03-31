@@ -10,42 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180319111628) do
+ActiveRecord::Schema.define(version: 20180331124205) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "street"
     t.string "city"
     t.integer "postalCode"
+    t.string "email"
+    t.integer "tlf"
     t.integer "restaurant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["restaurant_id"], name: "index_addresses_on_restaurant_id"
+  end
+
+  create_table "alerts", force: :cascade do |t|
+    t.string "subject"
+    t.string "content"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "dishes", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.string "image"
+    t.float "price"
     t.integer "restaurant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["restaurant_id"], name: "index_dishes_on_restaurant_id"
   end
 
-  create_table "galleries", force: :cascade do |t|
-    t.string "name"
+  create_table "photos", force: :cascade do |t|
+    t.string "image"
     t.integer "restaurant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["restaurant_id"], name: "index_galleries_on_restaurant_id"
   end
 
-  create_table "reserves", force: :cascade do |t|
+  create_table "reservations", force: :cascade do |t|
+    t.datetime "date"
     t.integer "personCount"
-    t.string "comments"
+    t.string "description"
     t.integer "restaurant_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["restaurant_id"], name: "index_reserves_on_restaurant_id"
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -53,7 +63,12 @@ ActiveRecord::Schema.define(version: 20180319111628) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image"
+  end
+
+  create_table "restaurants_types", id: false, force: :cascade do |t|
+    t.integer "restaurant_id"
+    t.integer "type_id"
+    t.index ["restaurant_id", "type_id"], name: "rest_index"
   end
 
   create_table "schedules", force: :cascade do |t|
@@ -63,11 +78,19 @@ ActiveRecord::Schema.define(version: 20180319111628) do
     t.integer "restaurant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["restaurant_id"], name: "index_schedules_on_restaurant_id"
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "username", default: "", null: false
     t.string "email", default: "", null: false
+    t.integer "tlf"
+    t.integer "role", default: 1
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -79,8 +102,12 @@ ActiveRecord::Schema.define(version: 20180319111628) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "lastname"
+    t.string "image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end

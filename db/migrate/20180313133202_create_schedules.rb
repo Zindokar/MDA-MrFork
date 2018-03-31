@@ -4,7 +4,8 @@ class CreateSchedules < ActiveRecord::Migration[5.1]
       t.string :weekDay
       t.datetime :openingTime
       t.datetime :closingTime
-      t.references :restaurant, foreign_key: true
+
+      t.integer :restaurant_id
 
       t.timestamps
     end

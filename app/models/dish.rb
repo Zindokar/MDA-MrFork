@@ -1,4 +1,7 @@
 class Dish < ApplicationRecord
-  validates :name, :description, presence: true
+  validates :name, :price, presence: true
   belongs_to :restaurant
+
+  mount_uploader :image, ImageUploader
+
 end

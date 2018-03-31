@@ -4,7 +4,10 @@ class CreateAddresses < ActiveRecord::Migration[5.1]
       t.string :street
       t.string :city
       t.integer :postalCode
-      t.references :restaurant , foreing_key: true
+      t.string :email
+      t.integer :tlf
+
+      t.integer :restaurant_id
 
       t.timestamps
     end
