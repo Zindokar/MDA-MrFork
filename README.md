@@ -1,4 +1,4 @@
-# [MDA] Mr.Fork
+# Mr.Fork
 
 ### Tecnología Back-End utilizadas
 - Ruby version: 2.4.1p111
@@ -16,4 +16,5 @@
 - Javascript
 	- JQuery
 
-### Realizado por: Sarah, Cynthia, Tomás, Jorge, Miguel y Alejandro
+### Realizado por: Sarah, Cynthia, Tomás, Jorge, Miki y Alex
+

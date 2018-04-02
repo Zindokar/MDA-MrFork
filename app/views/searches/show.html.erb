@@ -1,0 +1,28 @@
+<h2> Restaurantes que coinciden con la busqueda </h2>
+<tbody>
+<% if @restaurants.empty? && @addresses.empty? %>
+  <p>No hay restaurantes que coincidan con la búsqueda</p>
+<% else %>
+  <% @restaurants.each do |restaurant| %>
+    <tr>
+      <td><%= link_to restaurant.name, restaurant %></td>
+      <td><%= restaurant.location %></td>
+      <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
+      <td><%= link_to 'Destroy', restaurant, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+    </tr>
+    <br/>
+  <% end %>
+
+  <% @addresses.each do |restaurant| %>
+    <tr>
+      <td><%= link_to restaurant.restaurant.name, restaurant.restaurant %></td>
+      <td><%= restaurant.restaurant.location %></td>
+      <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
+      <td><%= link_to 'Destroy', restaurant, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+    </tr>
+    <br/>
+  <% end %>
+
+<% end %>
+<%= link_to 'Back', searches_path%>
+</tbody>
