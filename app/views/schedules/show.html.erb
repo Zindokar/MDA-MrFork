@@ -15,5 +15,5 @@
   <%= @schedule.closingTime %>
 </p>
 
-<%= link_to 'Edit', edit_schedule_path(@schedule) %> |
-<%= link_to 'Back', schedules_path %>
+<%= link_to 'Edit', [:edit, @restaurant, @schedule] %> |
+<%= link_to 'Back', restaurant_schedules_path %>

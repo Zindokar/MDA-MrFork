@@ -1,5 +1,26 @@
-<h1>New Reservation</h1>
+<%= form_with(model: [@restaurant, @restaurant.reservations.new], local: true) do |form| %>
 
-<%= render 'form', reservation: @reservation %>
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.datetime_local_field :date, id: :reservation_date %>
+  </div>
 
-<%= link_to 'Back', reservations_path %>
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :reservation_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :personCount %>
+    <%= form.text_field :personCount, id: :reservation_personCount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id, id: :reservation_user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

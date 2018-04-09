@@ -10,5 +10,5 @@
   <%= @dish.description %>
 </p>
 
-<%= link_to 'Edit', edit_dish_path(@dish) %> |
-<%= link_to 'Back', dishes_path %>
+<%= link_to 'Edit', [:edit, @restaurant, @dish] %> |
+<%= link_to 'Back', restaurant_dishes_path %>

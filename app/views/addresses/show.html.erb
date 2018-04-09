@@ -15,5 +15,5 @@
   <%= @address.postalCode %>
 </p>
 
-<%= link_to 'Edit', edit_address_path(@address) %> |
-<%= link_to 'Back', addresses_path %>
+<%= link_to 'Edit', [:edit, @address.restaurant, @address] %> |
+<%= link_to 'Back', restaurant_addresses_path %>

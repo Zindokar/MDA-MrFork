@@ -1,5 +1,36 @@
-<h1>New Address</h1>
+<%= form_with(model: [@restaurant, Address.new], local: true) do |form| %>
 
-<%= render 'form', address: @address %>
+  <div class="field">
+    <%= form.label :street %>
+    <%= form.text_field :street, id: :address_street %>
+  </div>
 
-<%= link_to 'Back', addresses_path %>
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, id: :address_city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :postalCode %>
+    <%= form.number_field :postalCode, id: :address_postalCode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :email%>
+  </div>
+
+  <div class="field">
+    <%= form.label :tlf %>
+    <%= form.number_field :tlf, id: :address_tlf %>
+  </div>
+
+  <div class="field" hidden>
+    <input id="address_restaurantid" type="number" name="address[restaurant_id]" value="<%= @restaurant.id %>" />
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+

@@ -1,5 +1,6 @@
 class DishesController < ApplicationController
   before_action :set_dish, only: [:show, :edit, :update, :destroy]
+  before_action :set_restaurant, except: :destroy
 
   # GET /dishes
   # GET /dishes.json
@@ -7,33 +8,15 @@ class DishesController < ApplicationController
     @dishes = Dish.all
   end
 
-  # GET /dishes/1
-  # GET /dishes/1.json
-  def show
-  end
-
-  # GET /dishes/new
-  def new
-    @dish = Dish.new
-  end
-
-  # GET /dishes/1/edit
-  def edit
-  end
-
   # POST /dishes
   # POST /dishes.json
   def create
-    @dish = Dish.new(dish_params)
+    @dish = @restaurant.dishes.new(dish_params)
 
-    respond_to do |format|
-      if @dish.save
-        format.html { redirect_to @dish, notice: 'Dish was successfully created.' }
-        format.json { render :show, status: :created, location: @dish }
-      else
-        format.html { render :new }
-        format.json { render json: @dish.errors, status: :unprocessable_entity }
-      end
+    if @dish.save
+      redirect_to restaurant_dishes_path, notice: 'Dish was successfully created'
+    else
+      redirect_to restaurant_dishes_path, notice: 'No ha sido posible crear el plato'
     end
   end
 
@@ -42,7 +25,7 @@ class DishesController < ApplicationController
   def update
     respond_to do |format|
       if @dish.update(dish_params)
-        format.html { redirect_to @dish, notice: 'Dish was successfully updated.' }
+        format.html { redirect_to [@restaurant, @dish], notice: 'Dish was successfully updated.' }
         format.json { render :show, status: :ok, location: @dish }
       else
         format.html { render :edit }
@@ -56,7 +39,7 @@ class DishesController < ApplicationController
   def destroy
     @dish.destroy
     respond_to do |format|
-      format.html { redirect_to dishes_url, notice: 'Dish was successfully destroyed.' }
+      format.html { redirect_to restaurant_dishes_url, notice: 'Dish was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +50,12 @@ class DishesController < ApplicationController
       @dish = Dish.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def set_restaurant
+      @restaurant = Restaurant.find(params[:restaurant_id])
+    end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
     def dish_params
-      params.require(:dish).permit(:name, :description)
+      params.require(:dish).permit(:name, :description, :price)
     end
 end

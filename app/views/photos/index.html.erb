@@ -16,9 +16,9 @@
       <tr>
         <td><%= photo.image %></td>
         <td><%= photo.restaurant_id %></td>
-        <td><%= link_to 'Show', photo %></td>
-        <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-        <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', [photo.restaurant, photo] %></td>
+        <td><%= link_to 'Edit', [:edit, photo.restaurant, photo] %></td>
+        <td><%= link_to 'Destroy', [photo.restaurant, photo], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Photo', new_photo_path %>
+<%= link_to 'New Photo', new_restaurant_photo_path %>

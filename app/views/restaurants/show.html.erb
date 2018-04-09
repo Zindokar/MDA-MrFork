@@ -5,16 +5,6 @@
   <%= @restaurant.name %>
 </p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @restaurant.location %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @restaurant.image_url if @restaurant.image.present? %>
-  <%= image_tag @restaurant.image_url(:thumb) if @restaurant.image.present? %>
-</p>
 
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>

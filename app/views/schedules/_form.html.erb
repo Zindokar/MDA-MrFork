@@ -1,4 +1,4 @@
-<%= form_with(model: schedule, local: true) do |form| %>
+<%= form_with(model: [@restaurant, @schedule], local: true) do |form| %>
   <% if schedule.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
@@ -12,18 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :weekDay %>
-    <%= form.text_field :weekDay, id: :schedule_weekDay %>
+    <select name="schedule[weekDay]">
+      <option value="Lunes">Lunes</option>
+      <option value="Martes">Martes</option>
+      <option value="Miércoles">Miércoles</option>
+      <option value="Jueves">Jueves</option>
+      <option value="Viernes">Viernes</option>
+      <option value="Sábado">Sábado</option>
+      <option value="Domingo">Domingo</option>
+    </select>
   </div>
+
 
   <div class="field">
     <%= form.label :openingTime %>
-    <%= form.datetime_select :openingTime, id: :schedule_openingTime %>
+    <%= form.time_select :openingTime, id: :schedule_openingTime %>
   </div>
 
   <div class="field">
     <%= form.label :closingTime %>
-    <%= form.datetime_select :closingTime, id: :schedule_closingTime %>
+    <%= form.time_select :closingTime, id: :schedule_closingTime %>
   </div>
 
   <div class="actions">
