@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :searches
   resources :types
+  get 'reservations/me' => 'reservations#me'
   resources :restaurants do
     resources :photos
     resources :addresses

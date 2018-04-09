@@ -1,11 +1,16 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, :except => :destroy
+  before_action :set_restaurant, :except => [:destroy, :me]
 
   # GET /reservations
   # GET /reservations.json
   def index
     @reservations = Reservation.all
+  end
+
+  def me
+    @test = "hola #{current_user.id}"
   end
 
   # GET /reservations/1

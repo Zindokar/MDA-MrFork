@@ -8,5 +8,5 @@ class User < ApplicationRecord
   has_many :alerts
   mount_uploader :image, ImageUploader
 
-  validates :email, :username, presence: true
+  validates :email, presence: true
 end
