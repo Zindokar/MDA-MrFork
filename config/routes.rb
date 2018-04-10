@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
-  resources :alerts
   devise_for :users, controllers: {
       sessions: 'users/sessions'
   }
 
+  resources :alerts
   resources :searches
   resources :types
+
   get 'reservations/me' => 'reservations#me'
+
+  post 'reservations/makeReservation' => 'reservations#makeReservation'
+
   resources :restaurants do
     resources :photos
     resources :addresses

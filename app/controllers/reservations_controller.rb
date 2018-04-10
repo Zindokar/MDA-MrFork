@@ -10,7 +10,16 @@ class ReservationsController < ApplicationController
   end
 
   def me
-    @test = "hola #{current_user.id}"
+    @reservations = Reservation.myReservations(current_user.id)
+  end
+
+  def makeReservation
+    @created = false
+    if request.method == "POST"
+      r = Reservation.new()
+      r.save
+      @created = true
+    end
   end
 
   # GET /reservations/1
@@ -53,6 +62,7 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation.destroy
     respond_to do |format|
+      # TODO: controlar si es dueño como esta o cliente -> reservations#me
       format.html { redirect_to restaurant_reservations_path, notice: 'Reservation was successfully destroyed.' }
       format.json { head :no_content }
     end
