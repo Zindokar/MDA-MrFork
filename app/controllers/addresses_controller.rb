@@ -5,7 +5,7 @@ class AddressesController < ApplicationController
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = Address.all
+    @addresses = @restaurant.address
   end
 
   # GET /addresses/1
@@ -65,6 +65,6 @@ class AddressesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def address_params
-    params.require(:address).permit(:street, :city, :postalCode, :email, :tlf, :restaurant_id)
+    params.require(:address).permit(:street, :city, :postalCode, :email, :tlf, :latitude, :longitude, :restaurant_id)
   end
 end

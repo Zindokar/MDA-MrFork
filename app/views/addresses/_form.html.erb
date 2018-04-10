@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+
   <div class="field">
     <%= form.label :street %>
     <%= form.text_field :street, id: :address_street %>
@@ -24,6 +25,26 @@
   <div class="field">
     <%= form.label :postalCode %>
     <%= form.number_field :postalCode, id: :address_postalCode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :email%>
+  </div>
+
+  <div class="field">
+    <%= form.label :tlf %>
+    <%= form.number_field :tlf, id: :address_tlf %>
+  </div>
+
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.number_field :latitude, id: :address_latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.number_field :longitude, id: :address_longitude %>
   </div>
 
   <div class="actions">

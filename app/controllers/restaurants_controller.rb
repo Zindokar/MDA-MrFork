@@ -64,13 +64,15 @@ class RestaurantsController < ApplicationController
 
   def load_restaurants
     @restaurants_default = Gmaps4rails.build_markers(Restaurant.all) do |plot, marker|
-      marker.lat plot.address.latitude
-      marker.lng plot.address.longitude
-      @status = rand(1..2)
-      @openingTime = rand(10..13).to_s  + ":00 am"
-      @closingTime = rand(20..24).to_s + ":00 pm"
-      @punctuation = rand(4..10)
-      marker.infowindow render_to_string(:partial => "/restaurants/info", :locals => {:name => plot.name, :openingTime => @openingTime, :closingTime => @closingTime, :punctuation => @punctuation })
+      if plot.address.present?
+        marker.lat plot.address.latitude
+        marker.lng plot.address.longitude
+        @status = rand(1..2)
+        @openingTime = rand(10..13).to_s  + ":00 am"
+        @closingTime = rand(20..24).to_s + ":00 pm"
+        @punctuation = rand(4..10)
+        marker.infowindow render_to_string(:partial => "/restaurants/info", :locals => {:name => plot.name, :openingTime => @openingTime, :closingTime => @closingTime, :punctuation => @punctuation })
+      end
     end
   end
 

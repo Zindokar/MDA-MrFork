@@ -5,6 +5,35 @@
   <%= @restaurant.name %>
 </p>
 
+<p>
+  <strong>Dishes:</strong>
+  <%= link_to "Go to Dishes", restaurant_dishes_path(@restaurant) %>
+</p>
+
+<p>
+  <strong>Photos:</strong>
+  <%= link_to "Go to Photos", restaurant_photos_path(@restaurant) %>
+</p>
+
+<p>
+  <strong>Schedules:</strong>
+  <%= link_to "Go to Schedules", restaurant_schedules_path(@restaurant) %>
+</p>
+
+<p>
+  <strong>Reservations:</strong>
+  <%= link_to "Go to Reservations", restaurant_reservations_path(@restaurant) %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <% if @restaurant.address.present? %>
+    <%= link_to "Go to Address", restaurant_address_path(@restaurant, @restaurant.address) %>
+  <% else %>
+    <%= link_to "Create Address", new_restaurant_address_path(@restaurant) %>
+  <% end %>
+</p>
+
 
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>
