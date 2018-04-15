@@ -15,5 +15,10 @@
   <%= @dish.description %>
 </p>
 
+<p>
+  <strong>Description:</strong>
+  <%= @dish.price %>
+</p>
+
 <%= link_to 'Edit', [:edit, @restaurant, @dish] %> |
 <%= link_to 'Back', restaurant_dishes_path %>
