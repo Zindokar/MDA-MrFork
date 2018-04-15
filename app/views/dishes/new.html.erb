@@ -15,6 +15,11 @@
     <%= form.number_field :price, id: :dish_price, step: :any %>
   </div>
 
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image, id: :dish_image %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

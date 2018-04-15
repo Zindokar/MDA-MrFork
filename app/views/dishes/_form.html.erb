@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+  <%= image_tag @dish.image.thumb %>
+
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, id: :dish_name %>
@@ -24,6 +26,11 @@
   <div class="field">
     <%= form.label :price %>
     <%= form.number_field :price, id: :dish_price, step: :any %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image, id: :dish_image %>
   </div>
 
   <div class="actions">
