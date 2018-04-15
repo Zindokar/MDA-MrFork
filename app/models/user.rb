@@ -6,12 +6,11 @@ class User < ApplicationRecord
 
   has_many :reservations
   has_many :alerts
-  mount_uploader :image, ImageUploader
-  enum role: [:user, :owner]
-  after_initialize :set_default_role, :if => :new_record?
 
-  def set_default_role
-    self.role ||= :user
+  def set_defaults
+    self.role ||= 1
   end
-  validates :email, :username, :tlf, presence: true
+  mount_uploader :image, ImageUploader
+  validates :tlf, length: {minimum: 9 , maximum: 9}
+  validates :email, :username,:tlf, presence: true
 end
