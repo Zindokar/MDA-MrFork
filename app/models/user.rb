@@ -6,7 +6,11 @@ class User < ApplicationRecord
 
   has_many :reservations
   has_many :alerts
-  mount_uploader :image, ImageUploader
 
-  validates :email, presence: true
+  def set_defaults
+    self.role ||= 1
+  end
+  mount_uploader :image, ImageUploader
+  validates :tlf, length: {minimum: 9 , maximum: 9}
+  validates :email, :username,:tlf, presence: true
 end
