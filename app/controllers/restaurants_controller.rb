@@ -11,7 +11,9 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1
   # GET /restaurants/1.json
   def show
-    @myReservation = Reservation.myRestaurantReservation(current_user.id, @restaurant.id)
+    if user_signed_in?
+      @myReservation = Reservation.myRestaurantReservation(current_user.id, @restaurant.id)
+    end
   end
 
   # GET /restaurants/new
