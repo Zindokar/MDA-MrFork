@@ -1,11 +1,16 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, :except => :destroy
+  before_action :set_restaurant, :except => [:destroy, :me]
 
   # GET /reservations
   # GET /reservations.json
   def index
     @reservations = @restaurant.reservations
+  end
+
+  def me
+    @reservations = Reservation.myReservations(current_user.id)
   end
 
   # GET /reservations/1
@@ -48,6 +53,7 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation.destroy
     respond_to do |format|
+      # TODO: controlar si es dueño como esta o cliente -> reservations#me
       format.html { redirect_to restaurant_reservations_path, notice: 'Reservation was successfully destroyed.' }
       format.json { head :no_content }
     end

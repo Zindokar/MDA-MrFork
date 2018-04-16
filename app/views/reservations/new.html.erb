@@ -1,5 +1,12 @@
 <%= form_with(model: [@restaurant, @restaurant.reservations.new], local: true) do |form| %>
-
+  <% if @reservation.present? %>
+    <ul>
+      <% if @reservation.errors.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+        </ul>
+      <% end %>
+  <% end %>
   <div class="field">
     <%= form.label :date %>
     <%= form.datetime_local_field :date, id: :reservation_date %>
@@ -17,7 +24,7 @@
 
   <div class="field">
     <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :reservation_user_id %>
+    <%= form.number_field :user_id, id: :reservation_user_id, value: current_user.id %>
   </div>
 
   <div class="actions">

@@ -1,0 +1,21 @@
+<h1>Tus reservas</h1>
+<p>
+  <table>
+    <thead>
+      <th>Restaurante</th>
+      <th>Fecha reserva</th>
+      <th>Personas</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= link_to reservation.restaurant.name, reservation.restaurant %></td>
+          <td><%= reservation.date %></td>
+          <td><%= reservation.personCount %></td>
+          <td><%= link_to 'Cancelar reserva', [reservation.restaurant, reservation], method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>
