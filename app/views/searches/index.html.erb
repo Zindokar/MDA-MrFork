@@ -1,5 +1,7 @@
 <%= form_tag "searches/show", method: :get do %>
-  <%= text_field_tag :keyword, nil, placeholder: "Búsqueda", :required => true%>
+  <%= text_field_tag :keyword, nil, placeholder: "Nombre, Calle, Código postal"%>
+  <%= select_tag "cityOption", options_for_select(@cities), prompt: "Ciudad" %>
+  <%= select_tag "foodOption", options_for_select(@food), prompt: "Tipo de comida" %>
   <%= content_tag :button, type: :submit do %>
     Buscar
   <% end %>
