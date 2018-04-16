@@ -21,7 +21,7 @@
 </p>
 
 <p>
-  <strong>Reservations:</strong>
+  <strong>Reservations: (total)</strong>
   <%= link_to "Go to Reservations", restaurant_reservations_path(@restaurant) %>
 </p>
 
@@ -34,6 +34,20 @@
   <% end %>
 </p>
 
-
+<% if @myReservation.present? %>
+<p>
+  <strong>Mi reserva: </strong>
+  Reserva preparada para:
+  <% @myReservation.each do |reservation|%>
+    <%= reservation.date %>
+  <p>
+    <strong><%= link_to 'Cancelar reserva', [reservation.restaurant, reservation], method: :delete, data: {confirm: '¿Está seguro?'} %></strong></p>
+  </p>
+  <% end %>
+<% else %>
+<p>
+  <strong><%= link_to 'Crear reserva', '/restaurants/1/reservations/new' %></strong>
+</p>
+<% end %>
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>

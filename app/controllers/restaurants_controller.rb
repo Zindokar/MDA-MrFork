@@ -11,6 +11,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1
   # GET /restaurants/1.json
   def show
+    @myReservation = Reservation.myRestaurantReservation(current_user.id, @restaurant.id)
   end
 
   # GET /restaurants/new

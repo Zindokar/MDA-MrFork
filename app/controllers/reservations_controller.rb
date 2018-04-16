@@ -13,15 +13,6 @@ class ReservationsController < ApplicationController
     @reservations = Reservation.myReservations(current_user.id)
   end
 
-  def makeReservation
-    @created = false
-    if request.method == "POST"
-      r = Reservation.new()
-      r.save
-      @created = true
-    end
-  end
-
   # GET /reservations/1
   # GET /reservations/1.json
   def show
