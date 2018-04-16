@@ -1,5 +1,5 @@
 class Restaurant < ApplicationRecord
-  validates :name, :location, presence: true
+  validates :name, presence: true
   has_many :dishes
   has_many :schedules
   has_many :reservations

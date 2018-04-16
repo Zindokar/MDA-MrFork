@@ -1,18 +1,17 @@
 Rails.application.routes.draw do
   resources :alerts
-  resources :types
-  resources :photos
-  resources :reservations
   devise_for :users, controllers: {
       sessions: 'users/sessions'
   }
 
   resources :searches
-  resources :addresses
-  resources :galleries
-  resources :schedules
-  resources :reserves
-  resources :dishes
-  resources :restaurants
+  resources :types
+  resources :restaurants do
+    resources :photos
+    resources :addresses
+    resources :reservations
+    resources :schedules
+    resources :dishes
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

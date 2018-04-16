@@ -2,7 +2,7 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @photo.image %>
+  <%= image_tag @photo.image %>
 </p>
 
 <p>
@@ -10,5 +10,5 @@
   <%= @photo.restaurant_id %>
 </p>
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+<%= link_to 'Edit', [:edit, @restaurant, @photo] %> |
+<%= link_to 'Back', restaurant_photos_path %>

@@ -1,15 +1,16 @@
-<%= form_with(model: address, local: true) do |form| %>
-  <% if address.errors.any? %>
+<%= form_for([@restaurant, @address]) do |form| %>
+  <% if @address.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(address.errors.count, "error") %> prohibited this address from being saved:</h2>
+      <h2><%= pluralize(@address.errors.count, "error") %> prohibited this address from being saved:</h2>
 
       <ul>
-      <% address.errors.full_messages.each do |message| %>
+      <% @address.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
+
 
   <div class="field">
     <%= form.label :street %>
@@ -24,6 +25,26 @@
   <div class="field">
     <%= form.label :postalCode %>
     <%= form.number_field :postalCode, id: :address_postalCode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :email%>
+  </div>
+
+  <div class="field">
+    <%= form.label :tlf %>
+    <%= form.number_field :tlf, id: :address_tlf %>
+  </div>
+
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.number_field :latitude, id: :address_latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.number_field :longitude, id: :address_longitude %>
   </div>
 
   <div class="actions">

@@ -1,5 +1,27 @@
-<h1>New Dish</h1>
+<%= form_with(model: [@restaurant, @restaurant.dishes.new], local: true) do |form| %>
 
-<%= render 'form', dish: @dish %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :dish_name %>
+  </div>
 
-<%= link_to 'Back', dishes_path %>
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :dish_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, id: :dish_price, step: :any %> €
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image, id: :dish_image %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+

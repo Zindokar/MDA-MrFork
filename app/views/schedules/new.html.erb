@@ -1,5 +1,28 @@
-<h1>New Schedule</h1>
+<%= form_with(model: [@restaurant, @restaurant.schedules.new], local: true) do |form| %>
 
-<%= render 'form', schedule: @schedule %>
+  <div class="field">
+    <select name="schedule[weekDay]">
+      <option value="Lunes">Lunes</option>
+      <option value="Martes">Martes</option>
+      <option value="Miércoles">Miércoles</option>
+      <option value="Jueves">Jueves</option>
+      <option value="Viernes">Viernes</option>
+      <option value="Sábado">Sábado</option>
+      <option value="Domingo">Domingo</option>
+    </select>
+  </div>
 
-<%= link_to 'Back', schedules_path %>
+  <div class="field">
+    <%= form.label :openingTime %>
+    <%= form.time_select :openingTime, id: :schedule_openingTime %>
+  </div>
+
+  <div class="field">
+    <%= form.label :closingTime %>
+    <%= form.time_select :closingTime, id: :schedule_closingTime %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

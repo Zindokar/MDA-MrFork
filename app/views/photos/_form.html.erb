@@ -1,4 +1,4 @@
-<%= form_with(model: photo, local: true) do |form| %>
+<%= form_with(model: [@restaurant, @photo], local: true) do |form| %>
   <% if photo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
@@ -11,14 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.text_field :image, id: :photo_image %>
-  </div>
+  <%= image_tag @photo.image.thumb %>
 
   <div class="field">
-    <%= form.label :restaurant_id %>
-    <%= form.number_field :restaurant_id, id: :photo_restaurant_id %>
+    <%= form.label :image %>
+    <%= form.file_field :image, id: :photo_image %>
   </div>
 
   <div class="actions">

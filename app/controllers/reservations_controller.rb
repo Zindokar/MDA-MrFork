@@ -1,10 +1,11 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+  before_action :set_restaurant, :except => :destroy
 
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = Reservation.all
+    @reservations = @restaurant.reservations
   end
 
   # GET /reservations/1
@@ -12,23 +13,14 @@ class ReservationsController < ApplicationController
   def show
   end
 
-  # GET /reservations/new
-  def new
-    @reservation = Reservation.new
-  end
-
-  # GET /reservations/1/edit
-  def edit
-  end
-
   # POST /reservations
   # POST /reservations.json
   def create
-    @reservation = Reservation.new(reservation_params)
+    @reservation = @restaurant.reservations.new(reservation_params)
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
+        format.html { redirect_to [@restaurant, @reservation], notice: 'Reservation was successfully created.' }
         format.json { render :show, status: :created, location: @reservation }
       else
         format.html { render :new }
@@ -42,7 +34,7 @@ class ReservationsController < ApplicationController
   def update
     respond_to do |format|
       if @reservation.update(reservation_params)
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
+        format.html { redirect_to [@restaurant, @reservation], notice: 'Photo was successfully updated.' }
         format.json { render :show, status: :ok, location: @reservation }
       else
         format.html { render :edit }
@@ -56,7 +48,7 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation.destroy
     respond_to do |format|
-      format.html { redirect_to reservations_url, notice: 'Reservation was successfully destroyed.' }
+      format.html { redirect_to restaurant_reservations_path, notice: 'Reservation was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +59,12 @@ class ReservationsController < ApplicationController
       @reservation = Reservation.find(params[:id])
     end
 
+    def set_restaurant
+      @restaurant = Restaurant.find(params[:restaurant_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:date, :description, :personCount, :restaurant_id, :user_id)
+      params.require(:reservation).permit(:date, :description, :personCount, :user_id)
     end
 end
