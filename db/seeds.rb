@@ -88,9 +88,9 @@ schedules = Schedule.create [{weekDay: "lunes", openingTime: Time.zone.parse('20
                      {weekDay: "domingo", openingTime: Time.zone.parse('2018-01-01 10:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 7}]
 
 reservations = Reservation.create [{personCount: 5, date: Time.now, description:"Alergia al agua" ,restaurant_id: 1, user_id:1},
-                                   {personCount: 5, date: Time.now, description:"Es un cumpleaños, quiero tarta" ,restaurant_id: 1, user_id:1},
-                                   {personCount: 2, date: Time.now, description:"Preferible mesa en ventana mirando a la torre Eifel" ,restaurant_id: 2, user_id:1},
-                                   {personCount: 15, date: Time.now, description:"Fumadores" ,restaurant_id: 5, user_id:1}]
+                                   {personCount: 5, date: Time.now, description:"Es un cumpleaños, quiero tarta" ,restaurant_id: 2, user_id:1},
+                                   {personCount: 2, date: Time.now, description:"Preferible mesa en ventana mirando a la torre Eifel" ,restaurant_id: 3, user_id:1},
+                                   {personCount: 15, date: Time.now, description:"Fumadores" ,restaurant_id: 4, user_id:1}]
 
 addresses = Address.create [{street: "Batalla del Ebro, 39", city: "Las Palmas", postalCode: "35013", tlf:922000001,
                                               email:"rest1@test.com", latitude:27.9933882, longitude:-15.4213781, restaurant_id: 1},
