@@ -13,3 +13,68 @@
  */
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+
+.searchContainer {
+  border: 1px solid #BBBBBB;
+  opacity: 0.8;
+  background-color: #BBBBBB;
+  height: 36px;
+}
+
+
+.textLink {
+  color: #2E2F30;
+}
+.textLink:hover {
+  color: #2E2F30;
+  font-weight: bold;
+}
+
+.form-control:focus, .form-control:hover{
+  border-color: #a8f0ea;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+
+.bootstrap-select :focus {
+  /*background: #BBBBBB;
+  background-repeat:no-repeat;*/
+  color: black;
+  font-weight: bold;
+}
+
+.btn-primary,
+.btn-default:hover,
+.btn-default:focus {
+  background-color: #a8f0ea;
+  border-color:#a8f0ea;
+  color: black;
+  font-weight: bold;
+}
+.tam{
+  font-size: 22px;
+}
+/*.table-hover>tbody>tr:nth-child(odd)>td :hover, .table-hover>tbody>tr:nth-child(odd)>th {
+
+  background-color: #a8f0ea;
+}
+.table-hover>tbody>tr:nth-child(even)>td, .table-hover>tbody>tr:nth-child(even)>th {
+  border-bottom: #a8f0ea;
+  background-color: #a8f0ea;
+}*/
+
+.table-hover>tbody>tr:nth-child(odd):hover{
+  background-color: #a8f0ea;
+}
+.table-hover>tbody>tr:nth-child(even):hover{
+  background-color: #a8f0ea;
+}
+.table-hover>thead>tr>th {
+  font-weight: bold;
+  color: black;
+  font-size: 18px;
+}
+
+
+
