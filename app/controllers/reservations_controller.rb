@@ -25,7 +25,7 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to [@restaurant, @reservation], notice: 'Reservation was successfully created.' }
+        format.html { redirect_to [@restaurant, @reservation], notice: 'Reserva creada correctamente.' }
         format.json { render :show, status: :created, location: @reservation }
       else
         format.html { render :new }
@@ -53,9 +53,12 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation.destroy
     respond_to do |format|
-      # TODO: controlar si es dueño como esta o cliente -> reservations#me
-      format.html { redirect_to restaurant_reservations_path, notice: 'Reservation was successfully destroyed.' }
-      format.json { head :no_content }
+      if user_signed_in? and current_user.role = 1
+        format.html { redirect_to '/reservations/me', notice: 'Reserva cancelada correctamente.'}
+      else
+        format.html { redirect_to restaurant_reservations_path, notice: 'Reserva destruida correctamente.' }
+        format.json { head :no_content }
+      end
     end
   end
 

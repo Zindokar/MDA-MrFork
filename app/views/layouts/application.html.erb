@@ -29,7 +29,14 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li class=""><a href="/">Inicio</a></li>
-          <li class="<%= "active" if params[:controller] == "restaurants" %>"><a href="/restaurants">Restaurantes</a></li>
+          <li class="<%= "active" if request.env['PATH_INFO'] == "/restaurants" %>"><a href="/restaurants">Restaurantes</a></li>
+          <% if user_signed_in? %>
+            <% if current_user.role == 2 %>
+              <li class="<%= "active" if request.env['PATH_INFO'] == "/restaurants/me" %>"><a href="/restaurants/me">Mis restaurantes</a></li>
+            <% elsif current_user.role == 1 %>
+              <li class="<%= "active" if request.env['PATH_INFO'] == "/reservations/me" %>"><a href="/reservations/me">Mis reservas</a></li>
+            <% end %>
+          <% end %>
         </ul>
         <form class="navbar-form navbar-right">
           <% if user_signed_in? %>
@@ -51,7 +58,12 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <%= yield %>
+    <p>
+      [DEBUG]: Path = '<%= request.env['PATH_INFO'] %>'
+    </p>
+    <div>
+      <%= yield %>
+    </div>
   </div>
 
   <footer class="footer">
