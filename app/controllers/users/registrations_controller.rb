@@ -14,9 +14,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+   def edit
+     super
+      @back = redirect_to('/restaurants')
+   end
 
   # PUT /resource
   # def update
