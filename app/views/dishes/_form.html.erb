@@ -11,30 +11,33 @@
     </div>
   <% end %>
 
-  <%= image_tag @dish.image.thumb %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :dish_name %>
+  <div class="field form-group">
+    <%= form.label "Nombre:" %>
+    <%= form.text_field :name, id: :dish_namem, :class=>"form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :dish_description %>
+  <div class="field form-group">
+    <%= form.label "Descripción:" %>
+    <%= form.text_field :description, id: :dish_description, :class=>"form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price, id: :dish_price, step: :any %>
+  <div class="field form-group">
+    <%= form.label "Precio (en €):" %>
+    <%= form.number_field :price, id: :dish_price, step: :any, :class=>"form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :image %>
+  <div class="field form-group">
+    <%= form.label "Imagen:" %>
+    <%= image_tag @dish.image.smallCarrusel, :class => "img-rounded" %>
     <%= form.file_field :image, id: :dish_image %>
   </div>
 
+  <br>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= link_to "Volver", restaurant_dishes_path, :class=>"btn btn-warning", "role" => "button" %>
+    <%= form.submit "Guardar cambios", :class=>"btn btn-default" %>
   </div>
 <% end %>
 

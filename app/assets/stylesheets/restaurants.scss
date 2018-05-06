@@ -1,3 +1,49 @@
 // Place all the styles related to the Restaurants controller here.
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.cabecera{
+  height: 69px;
+
+  a{
+    color: white;
+    vertical-align: middle;
+  }
+
+  a:visited{
+    color: white;
+  }
+
+}
+
+.carousel-inner > .item > img{
+  margin:auto;
+}
+
+#carousel-restaurant-photos{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+#carousel-restaurant-dishes{
+  height: 175px;
+  .item > img{
+    height: 175px;
+  }
+}
+
+.panelDescription {
+  min-height: 430px;
+  p{
+
+    font-size: 125%;
+  }
+}
+
+.panelDishes{
+  height: 195px;
+}
+
+.editHeader{
+  margin-bottom: 20px;
+}

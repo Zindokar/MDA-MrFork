@@ -1,28 +1,65 @@
-<%= form_with(model: [@restaurant, @restaurant.schedules.new], local: true) do |form| %>
+<div class="container editHeader">
+  <div class="col-md-12">
+    <h1>Editar restaurante: <%= @restaurant.name %></h1>
+  </div>
+</div>
 
-  <div class="field">
-    <select name="schedule[weekDay]">
-      <option value="Lunes">Lunes</option>
-      <option value="Martes">Martes</option>
-      <option value="Miércoles">Miércoles</option>
-      <option value="Jueves">Jueves</option>
-      <option value="Viernes">Viernes</option>
-      <option value="Sábado">Sábado</option>
-      <option value="Domingo">Domingo</option>
-    </select>
+<div class="container">
+  <div class="col-md-3">
+    <div class="list-group">
+      <%= link_to "Restaurante", edit_restaurant_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Información", edit_restaurant_address_path(@restaurant, @restaurant.address), :class => "list-group-item" %>
+      <%= link_to "Menú", restaurant_dishes_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Fotos", restaurant_photos_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Horarios", restaurant_schedules_path(@restaurant), :class => "list-group-item active" %>
+      <%= link_to "Volver", restaurant_path(@restaurant), :class => "list-group-item list-group-item-danger" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :openingTime %>
-    <%= form.time_select :openingTime, id: :schedule_openingTime %>
-  </div>
+  <div class="col-md-9">
 
-  <div class="field">
-    <%= form.label :closingTime %>
-    <%= form.time_select :closingTime, id: :schedule_closingTime %>
-  </div>
+    <%= form_with(model: [@restaurant, @restaurant.schedules.new], local: true) do |form| %>
 
-  <div class="actions">
-    <%= form.submit %>
+      <div class="field form-group">
+        <%= form.label "Día:" %>
+        <select name="schedule[weekDay]" class="form-control">
+          <option value="0">Lunes</option>
+          <option value="1">Martes</option>
+          <option value="2">Miércoles</option>
+          <option value="3">Jueves</option>
+          <option value="4">Viernes</option>
+          <option value="5">Sábado</option>
+          <option value="6">Domingo</option>
+        </select>
+      </div>
+
+      <div class="field form-group form-inline">
+        <%= form.label "Hora de apertura:" %>
+        <%= form.time_select :openingTime, {prompt: {hour: 'Hora', minute: 'Minuto'}, minute_step: 15}, {class: 'form-control'} %>
+      </div>
+
+      <div class="field form-group form-inline">
+        <%= form.label "Hora de cierre:" %>
+        <%= form.time_select :closingTime, {prompt: {hour: 'Hora', minute: 'Minuto'}, minute_step: 15}, {class: 'form-control'} %>
+      </div>
+
+
+      <br>
+
+      <div class="actions">
+        <%= link_to "Volver", restaurant_schedules_path, :class=>"btn btn-warning", "role" => "button" %>
+        <%= form.submit "Guardar", :class=>"btn btn-default" %>
+      </div>
+    <% end %>
+
+    <br>
+
+
   </div>
-<% end %>
+</div>
+
+
+
+
+
+
