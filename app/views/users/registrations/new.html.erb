@@ -7,20 +7,21 @@
     <%= f.label :username %><br />
     <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
   </div>
+
   <div class="field">
     <%= f.label :role %><br />
-    <%= f.select :role , options_for_select([["Select One","1"], "1", "2"])%>
+    <%= f.select :role , options_for_select([["Select One","1"], %w(User 1), %w(Owner 2)], :selected_role)%>
   </div>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email" %>
   </div>
   <div class="field">
     <%= f.label :tlf %><br />
     <% if 9 %>
       <em>(<%= 9 %> characters needed)</em>
     <% end %><br />
-    <%= f.text_field :tlf, autofocus: true, autocomplete: "off"%>
+    <%= f.text_field :tlf,autocomplete: "off"%>
   </div>
   <div class="field">
     <%= f.label :password %>

@@ -12,11 +12,11 @@
     <% if 9 %>
       <em>(<%= 9 %> characters needed)</em>
     <% end %><br/>
-    <%= f.text_field :tlf, autofocus: true, autocomplete: "off" %>
+    <%= f.text_field :tlf, autocomplete: "off" %>
   </div>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
