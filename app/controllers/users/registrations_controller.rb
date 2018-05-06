@@ -20,6 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/edit
    def edit
      super
+
       @back = redirect_to('/restaurants')
    end
 
