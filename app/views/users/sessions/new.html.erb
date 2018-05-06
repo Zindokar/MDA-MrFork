@@ -9,7 +9,6 @@
       </div>
     </div>
   </div>
-  <div class="main-login main-center">
     <div class="form-horizontal">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     </div>
@@ -34,6 +33,5 @@
     <%= f.submit "Iniciar sesión" %>
   </div>
 <% end %>
-      </div>
 <%= render "users/shared/links" %>
 </div>
