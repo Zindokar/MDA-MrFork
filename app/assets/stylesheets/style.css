@@ -28,7 +28,6 @@ h1,
 h2,
 h3,
 h4,
-h5,
 h6 {
     color: #584a3e;
 }
@@ -65,13 +64,22 @@ h4 {
     font-weight: 400;
     color: #d2c970;
 }
-
+h5{
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+/*
 h5 {
     font-size: 20px;
     line-height: 22px;
     font-weight: 400;
     color: #d2c970;
 }
+*/
 
 p a:hover {
     text-decoration: underline;
@@ -269,7 +277,7 @@ q + .img {
 .parallax01 {
     background-color: #FFF;
     background-image: url(parallax01.png);
-    padding: 210px 0 187px;
+    padding: 80px 0 80px;
 
 }
 
@@ -515,6 +523,7 @@ main {
 /*==================== Well ====================*/
 .well {
     padding: 59px 0 81px 0;
+
 }
 
 .well__02 {
@@ -527,7 +536,7 @@ main {
 }
 
 .well__04 {
-    padding: 103px 0 114px 0;
+    padding: 103px 0 160px 0;
 }
 
 /*==================== Background ====================*/
