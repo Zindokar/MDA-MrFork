@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, :except => :destroy
+  before_action :set_restaurant
   before_action :authenticate
 
   # GET /photos
