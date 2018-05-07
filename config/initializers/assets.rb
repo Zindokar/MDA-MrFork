@@ -24,3 +24,6 @@ Rails.application.config.assets.precompile += %w( schedules.scss )
 Rails.application.config.assets.precompile += %w( searches.scss )
 Rails.application.config.assets.precompile += %w( types.scss )
 Rails.application.config.assets.precompile += %w( welcome.scss )
+
+
+Rails.application.config.assets.precompile += %w( admin.css )

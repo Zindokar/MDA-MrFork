@@ -1,4 +1,4 @@
-class RestaurantsController < ApplicationController
+  class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
   before_action :authenticate, only: [:edit, :update, :destroy]
 
@@ -74,9 +74,14 @@ class RestaurantsController < ApplicationController
   def destroy
     @restaurant.destroy
     respond_to do |format|
+    if current_user.role==2
       format.html { redirect_to restaurants_url, notice: 'Restaurant was successfully destroyed.' }
       format.json { head :no_content }
+    else
+      format.html { redirect_to("/admin/control_panel" , notice: 'User was successfully destroyed.' )}
+      format.json { head :no_content }
     end
+  end
   end
 
   def load_restaurants
