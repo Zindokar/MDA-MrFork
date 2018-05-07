@@ -51,16 +51,17 @@
     </div>
   </nav>
 
-  <div class="container">
+  <% if params[:controller] == "welcome" %>
+    <div class="container-fluid">
+  <% else %>
+    <div class="container">
+  <% end %>
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <p>
-      [DEBUG]: Path = '<%= request.env['PATH_INFO'] %>'
-    </p>
     <div>
       <%= yield %>
     </div>
