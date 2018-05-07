@@ -15,6 +15,7 @@ class Restaurant < ApplicationRecord
   #Me devuelve los tipos de comida
   scope :restaurantByFood, -> (name) { Type.where("name LIKE ?", name)}
   scope :restaurantByType, -> (type) { Type.find_by_name(type)}
+  scope :photoRestaurant, -> (id) { Photo.find_by_restaurant_id(id)}
 
   def belongsToUser?(user)
     (user_id == user.id)
