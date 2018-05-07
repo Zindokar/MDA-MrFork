@@ -30,7 +30,7 @@
       <ul class="nav navbar-nav">
         <li class=""><a href="/">Inicio</a></li>
         <li class="<%= "active" if request.env['PATH_INFO'] == "/restaurants" %>">
-          <a href="/restaurants">Restaurantes</a></li>
+          <a href="/searches">Restaurantes</a></li>
         <% if user_signed_in? %>
           <% if current_user.role == 2 %>
             <li class="<%= "active" if request.env['PATH_INFO'] == "/restaurants/me" %>">
@@ -64,9 +64,6 @@
 <% if alert %>
   <p class="alert alert-danger"><%= alert %></p>
 <% end %>
-<p>
-  [DEBUG]: Path = '<%= request.env['PATH_INFO'] %>'
-</p>
 <div>
   <%= yield %>
 </div>
