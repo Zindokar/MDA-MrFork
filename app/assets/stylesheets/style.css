@@ -571,6 +571,7 @@ main {
 /*========================================================
 					 FOOTER  Styles
 =========================================================*/
+
 footer {
     text-align: center;
     padding: 44px 0 40px;
@@ -579,7 +580,7 @@ footer {
     box-shadow: inset 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
-/*==================== Footer Brand ====================*/
+
 .footer-brand {
     display: inline-block;
     font-family: 'Ubuntu', sans-serif;
