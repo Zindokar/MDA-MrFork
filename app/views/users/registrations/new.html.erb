@@ -13,7 +13,7 @@
           <%= devise_error_messages! %>
       <div class="form-group">
         <%= f.label :username %><br/>
-          <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+          <%= f.text_field :username, autofocus: true, autocomplete: "username" , :class=>"form-control"%>
       </div>
 
       <div class="form-group">
@@ -23,26 +23,30 @@
 
       <div class="form-group">
         <%= f.label "Correo electrónico" %><br/>
-        <%= f.email_field :email, autocomplete: "email" %>
+        <%= f.email_field :email, autocomplete: "email", :class=>"form-control" %>
       </div>
       <div class="form-group">
         <%= f.label "Teléfono" %><br/>
         <% if 9 %>
           <em>(<%= 9 %> caracteres necesarios)</em>
         <% end %><br/>
-        <%= f.text_field :tlf,autocomplete: "off"%>
+        <%= f.text_field :tlf, :class=>"form-control"%>
       </div>
       <div class="form-group">
         <%= f.label "Contraseña" %><br/>
         <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> caracteres mínimos)</em>
         <% end %><br />
-        <%= f.password_field :password, autocomplete: "off" %>
+        <%= f.password_field :password, :class=>"form-control"%>
       </div>
 
       <div class="form-group">
         <%= f.label "Contraseña" %><br/>
-        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+        <%= f.password_field :password_confirmation, :class=>"form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Image" %><br/>
+        <%= f.file_field :image, :class=>"form-control" %>
       </div>
 
       <div class="actions">
