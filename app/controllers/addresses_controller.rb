@@ -1,6 +1,6 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, except: :destroy
+  before_action :set_restaurant
   before_action :authenticate
 
   # GET /addresses
