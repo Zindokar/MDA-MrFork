@@ -34,6 +34,14 @@ class ImageUploader < CarrierWave::Uploader::Base
     process resize_to_fit: [50, 50]
   end
 
+  version :bigCarrusel do
+    process resize_to_fit: [nil, 700]
+  end
+
+  version :smallCarrusel do
+    process resize_to_fit: [nil, 200]
+  end
+
   def public_id
     model.name
   end

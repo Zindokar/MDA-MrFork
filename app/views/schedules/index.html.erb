@@ -1,31 +1,51 @@
-<p id="notice"><%= notice %></p>
+<div class="container editHeader">
+  <div class="col-md-12">
+    <h1>Editar restaurante: <%= @restaurant.name %></h1>
+  </div>
+</div>
 
-<h1>Schedules</h1>
+<div class="container">
+  <div class="col-md-3">
+    <div class="list-group">
+      <%= link_to "Restaurante", edit_restaurant_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Información", edit_restaurant_address_path(@restaurant, @restaurant.address), :class => "list-group-item" %>
+      <%= link_to "Menú", restaurant_dishes_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Fotos", restaurant_photos_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Horarios", restaurant_schedules_path(@restaurant), :class => "list-group-item active" %>
+      <%= link_to "Volver", restaurant_path(@restaurant), :class => "list-group-item list-group-item-danger" %>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Weekday</th>
-      <th>Openingtime</th>
-      <th>Closingtime</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="col-md-9">
 
-  <tbody>
-    <% @schedules.each do |schedule| %>
+    <table class="table table-hover">
+      <thead>
       <tr>
-        <td><%= schedule.weekDay %></td>
-        <td><%= schedule.openingTime %></td>
-        <td><%= schedule.closingTime %></td>
-        <td><%= link_to 'Show', [@restaurant, schedule] %></td>
-        <td><%= link_to 'Edit', [:edit, @restaurant, schedule] %></td>
-        <td><%= link_to 'Destroy', [@restaurant, schedule], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Día</th>
+        <th>Apertura</th>
+        <th>Cierre</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
+      <tbody>
+      <% @schedules.each do |schedule| %>
+        <tr>
+          <td><%= schedule.dayToString %></td>
+          <td><%= schedule.openingTime.strftime("%H:%M") %></td>
+          <td><%= schedule.closingTime.strftime("%H:%M") %></td>
+          <td>
+            <%= link_to [@restaurant, schedule], method: :delete, data: { confirm: 'Are you sure?' } do%>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
 
-<%= link_to 'New Schedule', new_restaurant_schedule_path %>
+    <br>
+
+    <%= link_to "Nuevo horario", new_restaurant_schedule_path, :class=>"btn btn-default", "role" => "button" %>
+  </div>
+</div>

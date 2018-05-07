@@ -1,6 +1,7 @@
 class SchedulesController < ApplicationController
   before_action :set_schedule, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, :except => :destroy
+  before_action :set_restaurant
+  before_action :authenticate
 
   # GET /schedules
   # GET /schedules.json
@@ -24,7 +25,7 @@ class SchedulesController < ApplicationController
 
     respond_to do |format|
       if @schedule.save
-        format.html { redirect_to [@restaurant, @schedule], notice: 'Reservation was successfully created.' }
+        format.html { redirect_to restaurant_schedules_path, notice: 'Reservation was successfully created.' }
         format.json { render :show, status: :created, location: @schedule }
       else
         format.html { render :new }
@@ -58,17 +59,23 @@ class SchedulesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_schedule
+  # Use callbacks to share common setup or constraints between actions.
+  def set_schedule
       @schedule = Schedule.find(params[:id])
     end
 
-    def set_restaurant
+  def set_restaurant
       @restaurant = Restaurant.find(params[:restaurant_id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def schedule_params
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def schedule_params
       params.require(:schedule).permit(:weekDay, :openingTime, :closingTime)
+    end
+
+    def authenticate
+      if !user_signed_in? || !@restaurant.belongsToUser?(current_user) || current_user.role == 1
+        redirect_to(@restaurant, alert: "No tiene permiso")
+      end
     end
 end

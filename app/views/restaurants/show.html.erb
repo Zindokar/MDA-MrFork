@@ -1,56 +1,261 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="col-md-6 cabecera">
+    <h1><%= @restaurant.name %></h1>
+  </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
-</p>
-
-<p>
-  <strong>Dishes:</strong>
-  <%= link_to "Go to Dishes", restaurant_dishes_path(@restaurant) %>
-</p>
-
-<p>
-  <strong>Photos:</strong>
-  <%= link_to "Go to Photos", restaurant_photos_path(@restaurant) %>
-</p>
-
-<p>
-  <strong>Schedules:</strong>
-  <%= link_to "Go to Schedules", restaurant_schedules_path(@restaurant) %>
-</p>
-
-<p>
-  <strong>Reservations: (total)</strong>
-  <%= link_to "Go to Reservations", restaurant_reservations_path(@restaurant) %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <% if @restaurant.address.present? %>
-    <%= link_to "Go to Address", restaurant_address_path(@restaurant, @restaurant.address) %>
+  <% if !user_signed_in? %>
+    <div class="col-md-3 col-md-offset-3 cabecera">
+      <%= link_to "Reservar Mesa", restaurants_path, :class=>"btn btn-primary btn-lg btn-block", "role" => "button", "disabled"=>"disabled" %>
+    </div>
   <% else %>
-    <%= link_to "Create Address", new_restaurant_address_path(@restaurant) %>
+    <div class="col-md-3 cabecera">
+      <% if @restaurant.belongsToUser?(current_user) || current_user.role == 0 %>
+        <%= link_to "Configurar", edit_restaurant_path(@restaurant), :class=>"btn btn-success btn-lg btn-block", "role"=>"button" %>
+      <% end %>
+    </div>
+    <div class="col-md-3 cabecera">
+      <% if Reservation.myRestaurantReservation(current_user.id, @restaurant.id).count == 0 %>
+        <%= link_to "Reservar Mesa", new_restaurant_reservation_path(@restaurant), :class=>"btn btn-primary btn-lg btn-block", "role" => "button"%>
+      <% else %>
+        <%= link_to "Mesa Reservada", "/reservations/me", :class=>"btn btn-primary btn-lg btn-block", "role" => "button"%>
+      <% end %>
+    </div>
   <% end %>
-</p>
 
-<% if user_signed_in? %>
-  <% if @myReservation.present? %>
-  <p>
-    <strong>Mi reserva: </strong>
-    Reserva preparada para:
-    <% @myReservation.each do |reservation|%>
-      <%= reservation.date %>
-    <p>
-      <strong><%= link_to 'Cancelar reserva', [reservation.restaurant, reservation], method: :delete, data: {confirm: '¿Está seguro?'} %></strong></p>
-    </p>
-    <% end %>
-  <% else %>
-  <p>
-    <strong><%= link_to 'Crear reserva', '/restaurants/1/reservations/new' %></strong>
-  </p>
-  <% end %>
-<% end %>
 
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', restaurants_path %>
+</div>
+
+<div class="container">
+  <div class="col-md-12">
+
+
+    <div id="carousel-restaurant-photos" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+
+        <% @photos.count.times do |i| %>
+          <% if i == 0 %>
+            <li data-target="#carousel-restaurant-photos" data-slide-to="#{i}" class="active"></li>
+          <% else%>
+            <li data-target="#carousel-restaurant-photos" data-slide-to="#{i}"></li>
+          <% end %>
+        <% end %>
+
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+
+        <% @photos.each_with_index do |photo, i|%>
+
+          <% if i == 0 %>
+            <div class="item active">
+              <%= image_tag photo.image.bigCarrusel, class: "imageCarrusel" %>
+            </div>
+
+          <% else %>
+            <div class="item">
+              <%= image_tag  photo.image.bigCarrusel, class: "imageCarrusel" %>
+            </div>
+
+          <% end %>
+        <% end %>
+
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-restaurant-photos" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-restaurant-photos" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Descripción</h3>
+      </div>
+      <div class="panel-body panelDescription">
+        <h4>
+        <% @types.each do |type| %>
+            <%= link_to "/searches/search_food?foodOption=#{type.name}" do %>
+              <span class="label label-primary"><%= type.name %></span>
+            <% end %>
+        <% end %>
+        </h4>
+        <br>
+        <p class="textToFit"><%= @restaurant.description %></p>
+        <br><h3>Horarios:</h3>
+        <% @schedules.each do |schedule| %>
+          <% if schedule.weekDay == Time.now.wday %>
+            <p><span class="label label-success"><%= schedule.dayToString %>:</span> De <%= schedule.openingTime.strftime("%H:%M") %> a <%= schedule.closingTime.strftime("%H:%M") %></p>
+          <% else %>
+              <p><%= schedule.dayToString %>: De <%= schedule.openingTime.strftime("%H:%M") %> a <%= schedule.closingTime.strftime("%H:%M") %></p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Mapa</h3>
+      </div>
+      <div class="panel-body">
+        <div id="map" style='width: 100%; height: 400px;'></div>
+        <script type="text/javascript">
+            handler = Gmaps.build('Google');
+            handler.buildMap({provider: {}, internal: {id: 'map'}}, function () {
+                markers = handler.addMarkers([
+                    {
+                        "lat": <%= @restaurant.address.latitude %>,
+                        "lng": <%= @restaurant.address.longitude %>
+
+                    }
+                ]);
+                handler.bounds.extendWith(markers);
+                handler.fitMapToBounds();
+                handler.getMap().setZoom(15);
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Platos</h3>
+      </div>
+      <div class="panel-body panelDishes">
+
+        <%= link_to "#" ,"data-toggle"=>"modal", "data-target"=>"#myModal" do %>
+
+        <div id="carousel-restaurant-dishes" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+
+            <% @dishes.count.times do |i| %>
+              <% if i == 0 %>
+                <li data-target="#carousel-restaurant-dishes" data-slide-to="#{i}" class="active"></li>
+              <% else %>
+                <li data-target="#carousel-restaurant-dishes" data-slide-to="#{i}"></li>
+              <% end %>
+            <% end %>
+
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+
+            <% @dishes.each_with_index do |dish, i| %>
+
+              <% if i == 0 %>
+                <div class="item active">
+                  <%= image_tag dish.image.smallCarrusel, class: "imageCarrusel" %>
+                  <div class="carousel-caption">
+                    <h3>
+                      <%= dish.name %>
+                    </h3>
+                  </div>
+                </div>
+
+              <% else %>
+                <div class="item">
+                  <%= image_tag dish.image.smallCarrusel, class: "imageCarrusel" %>
+                  <div class="carousel-caption">
+                    <h3>
+                      <%= dish.name %>
+                    </h3>
+                  </div>
+                </div>
+
+              <% end %>
+            <% end %>
+
+          </div>
+
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-restaurant-dishes" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#carousel-restaurant-dishes" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Contacto</h3>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item"><b>Dirección: </b><%= @address.street %></li>
+        <li class="list-group-item"><b>Ciudad: </b><%= @address.city %></li>
+        <li class="list-group-item"><b>CP: </b><%= @address.postalCode %></li>
+        <li class="list-group-item"><b>Tlf: </b><%= @address.tlf %></li>
+        <li class="list-group-item"><b>E-mail: </b><%= @address.email %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Menú</h4>
+      </div>
+      <div class="modal-body">
+
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% @dishes.each do |dish| %>
+              <tr rel="popover" data-img="<%= dish.image.smallCarrusel %>">
+                <td><%= dish.name %></td>
+                <td><%= dish.description %></td>
+                <td><%= dish.price %> €</td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
+      </div>
+    </div>
+  </div>
+</div>

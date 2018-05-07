@@ -11,12 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :restaurant_name %>
+  <div class="field form-group">
+    <%= form.label "Nombre:" %>
+    <%= form.text_field :name, id: :restaurant_name, :class=>"form-control" %>
   </div>
 
+  <div class="field form-group">
+    <%= form.label "Description:" %>
+    <%= form.text_area(:description,id: :restaurant_description, cols: 60, rows: 10, :class=>"form-control") %>
+  </div>
+
+  <br>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Guardar cambios",:class=>"btn btn-default"%>
   </div>
 <% end %>

@@ -1,6 +1,22 @@
-<h1>Editing Address</h1>
+<div class="container editHeader">
+  <div class="col-md-12">
+    <h1>Editar restaurante: <%= @restaurant.name %></h1>
+  </div>
+</div>
 
-<%= render 'form', address: @address %>
+<div class="container">
+  <div class="col-md-3">
+    <div class="list-group">
+      <%= link_to "Restaurante", edit_restaurant_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Información", edit_restaurant_address_path(@restaurant, @restaurant.address), :class => "list-group-item active  " %>
+      <%= link_to "Menú", restaurant_dishes_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Fotos", restaurant_photos_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Horarios", restaurant_schedules_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Volver", restaurant_path(@restaurant), :class => "list-group-item list-group-item-danger" %>
+    </div>
+  </div>
 
-<%= link_to 'Show', [@address.restaurant, @address] %> |
-<%= link_to 'Back', restaurant_address_path %>
+  <div class="col-md-9">
+    <%= render 'form', address: @address %>
+  </div>
+</div>
