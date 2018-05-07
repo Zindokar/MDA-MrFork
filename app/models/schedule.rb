@@ -6,19 +6,19 @@ class Schedule < ApplicationRecord
 
   def dayToString
     case weekDay
-    when 0
-      return "Lunes"
     when 1
-      return "Martes"
+      return "Lunes"
     when 2
-      return "Miércoles"
+      return "Martes"
     when 3
-      return "Jueves"
+      return "Miércoles"
     when 4
-      return "Viernes"
+      return "Jueves"
     when 5
-      return "Sábado"
+      return "Viernes"
     when 6
+      return "Sábado"
+    when 0
       return "Domingo"
     end
   end

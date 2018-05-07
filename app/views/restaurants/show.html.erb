@@ -96,7 +96,7 @@
         <p class="textToFit"><%= @restaurant.description %></p>
         <br><h3>Horarios:</h3>
         <% @schedules.each do |schedule| %>
-          <% if schedule.weekDay == Time.now.day %>
+          <% if schedule.weekDay == Time.now.wday %>
             <p><span class="label label-success"><%= schedule.dayToString %>:</span> De <%= schedule.openingTime.strftime("%H:%M") %> a <%= schedule.closingTime.strftime("%H:%M") %></p>
           <% else %>
               <p><%= schedule.dayToString %>: De <%= schedule.openingTime.strftime("%H:%M") %> a <%= schedule.closingTime.strftime("%H:%M") %></p>
