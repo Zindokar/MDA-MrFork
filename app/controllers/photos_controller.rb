@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, :except => :destroy
+  before_action :set_restaurant
+  before_action :authenticate
 
   # GET /photos
   # GET /photos.json
@@ -15,7 +16,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to [@restaurant, @photo], notice: 'Photo was successfully created.' }
+        format.html { redirect_to restaurant_photos_path, notice: 'Photo was successfully created.' }
         format.json { render :show, status: :created, location: @photo }
       else
         format.html { render :new }
@@ -49,17 +50,23 @@ class PhotosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_photo
+  # Use callbacks to share common setup or constraints between actions.
+  def set_photo
       @photo = Photo.find(params[:id])
     end
 
-    def set_restaurant
+  def set_restaurant
       @restaurant = Restaurant.find(params[:restaurant_id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def photo_params
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def photo_params
       params.require(:photo).permit(:image)
+    end
+
+    def authenticate
+      if !user_signed_in? || !@restaurant.belongsToUser?(current_user) || current_user.role == 1
+        redirect_to(@restaurant, alert: "No tiene permiso")
+      end
     end
 end

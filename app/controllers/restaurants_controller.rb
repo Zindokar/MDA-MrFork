@@ -1,9 +1,11 @@
   class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate, only: [:edit, :update, :destroy]
 
   # GET /restaurants
   # GET /restaurants.json
   def index
+
     load_restaurants
     @restaurants = Restaurant.all
   end
@@ -14,10 +16,18 @@
     if user_signed_in?
       @myReservation = Reservation.myRestaurantReservation(current_user.id, @restaurant.id)
     end
+    @photos = @restaurant.photos
+    @dishes = @restaurant.dishes
+    @address = @restaurant.address
+    @types = @restaurant.types
+    @schedules = @restaurant.schedules
   end
 
   # GET /restaurants/new
   def new
+    if !user_signed_in? || current_user.role == 1
+      redirect_to(restaurants_path, alert: "No tiene permiso")
+    end
     @restaurant = Restaurant.new
   end
 
@@ -28,6 +38,10 @@
   # POST /restaurants
   # POST /restaurants.json
   def create
+    if !user_signed_in? || current_user.role == 1
+      redirect_to(restaurants_path, alert: "No tiene permiso")
+    end
+
     @restaurant = Restaurant.new(restaurant_params)
 
     respond_to do |format|
@@ -46,7 +60,7 @@
   def update
     respond_to do |format|
       if @restaurant.update(restaurant_params)
-        format.html { redirect_to @restaurant, notice: 'Restaurant was successfully updated.' }
+        format.html { redirect_to edit_restaurant_path(@restaurant), notice: 'Restaurant was successfully updated.' }
         format.json { render :show, status: :ok, location: @restaurant }
       else
         format.html { render :edit }
@@ -92,6 +106,12 @@
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def restaurant_params
-    params.require(:restaurant).permit(:name)
+    params.require(:restaurant).permit(:name, :description)
+  end
+
+  def authenticate
+    if !user_signed_in? || !@restaurant.belongsToUser?(current_user) || current_user.role == 1
+      redirect_to(@restaurant, alert: "No tiene permiso")
+    end
   end
 end
