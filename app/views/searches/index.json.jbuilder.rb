@@ -1,0 +1,1 @@
+json.array! @allRestaurants, partial: 'restaurants/restaurant', as: :restaurant

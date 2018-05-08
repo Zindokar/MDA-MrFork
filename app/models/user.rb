@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :reservations
   has_many :alerts
+  has_many :restaurants
 
   def set_defaults
     self.role ||= 1
