@@ -8,9 +8,20 @@ Rails.application.routes.draw do
   resources :searches
   resources :types
 
+  get 'admin/control_panel' => 'admin#index'
+
+  get 'admin/manage_users' => 'admin#manage_users'
+
+  get 'admin/show_restaurants' => 'admin#show_restaurants_admin'
+
+  get 'admin/manage_restaurants' => 'admin#manage_restaurants'
+
   get 'reservations/me' => 'reservations#me'
 
   post 'reservations/makeReservation' => 'reservations#makeReservation'
+
+  resources :user do
+  end
 
   resources :restaurants do
     resources :photos
