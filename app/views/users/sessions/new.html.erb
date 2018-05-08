@@ -4,34 +4,33 @@
     <div class="panel-heading">
       <div class="panel-title text-center">
         <h1 class="title text-primary">Mr. Fork</h1>
-        <h2 class="">Log in</h2>
+        <h2 class="">Iniciar sesión</h2>
         <hr/>
       </div>
     </div>
   </div>
     <div class="form-horizontal">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    </div>
-  <div class="form-group">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "email" %>
-  </div>
 
-  <div class="form-group">
-    <%= f.label "Contraseña" %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
     <div class="form-group">
-      <%= f.check_box :remember_me %>
-      <%= f.label "Recuerdame" %>
+      <%= f.label :username %><br />
+      <%= f.text_field :username, autofocus: true, autocomplete: "email" %>
     </div>
-  <% end -%>
+    <div class="form-group">
+      <%= f.label "Contraseña" %><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Iniciar sesión" %>
-  </div>
-<% end %>
-<%= render "users/shared/links" %>
+    <% if devise_mapping.rememberable? -%>
+      <div class="form-group">
+        <%= f.check_box :remember_me %>
+        <%= f.label "Recuerdame" %>
+      </div>
+    <% end -%>
+    <div class="actions">
+      <%= f.submit "Iniciar sesión" %>
+    </div>
+    <% end %>
+    </div>
+  <%= render "users/shared/links" %>
 </div>
