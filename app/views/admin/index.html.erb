@@ -4,7 +4,6 @@
 </head>
 
 <body>
-  <p id="notice"><%= notice %></p>
 
   <div class="panel panel-warning">
     <div class="panel-heading">
@@ -33,9 +32,9 @@
               <tr>
                 <td class="text-center"><%= restaurant.name %></td>
                 <td class="text-center"><%= restaurant.address.city%></td>
-                <td class="text-center"><%= link_to 'Show', restaurant %></td>
-                <td class="text-center"><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
-                <td class="text-center"><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td class="text-center"><%= link_to 'Ver', restaurant %></td>
+                <td class="text-center"><%= link_to 'Editar', edit_restaurant_path(restaurant) %></td>
+                <td class="text-center"><%= link_to 'Eliminar', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
               <% end %>
             </tbody>
@@ -72,13 +71,17 @@
               <td class="text-center"><%=user.username%></td>
               <td class="text-center"><%=user.email%></td>
               <td class="text-center"><%if user.role == 1%>
-                owner
+                dueño
                 <%else%>
-                user
+                usuario
                 <%end%></td>
                 <td class="text-center"><%=user.created_at%></td>
                 <td class="text-center">
-                  <%=link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }%>
+                  <%=
+                  if user.id != current_user.id
+                    link_to 'Eliminar', user, method: :delete, data: { confirm: 'Are you sure?' }
+                  end
+                  %>
                 </td>
 
               </tr>
