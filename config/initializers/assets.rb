@@ -16,3 +16,6 @@ Rails.application.config.assets.precompile += %w( grid.css )
 Rails.application.config.assets.precompile += %w( style.css )
 Rails.application.config.assets.precompile += %w( searches.css )
 Rails.application.config.assets.precompile += %w( restaurants.css )
+
+Rails.application.config.assets.precompile += %w( dishes.css )
+Rails.application.config.assets.precompile += %w( addresses.css )

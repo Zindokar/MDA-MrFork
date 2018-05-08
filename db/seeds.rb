@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'time'
 
-u = User.create username:"test", password:"testtest", email:"test@test.com", tlf: 928570666, name:"test", lastname:"Quevedo"
+u = User.create username:"test", password:"testtest", email:"test@test.com", tlf: 928570666, name:"test", lastname:"Quevedo", role:2
 u.image = Rails.root.join("seedImages/avatar.jpg").open
 u.save!
 
