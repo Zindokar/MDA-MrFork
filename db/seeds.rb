@@ -7,17 +7,23 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'time'
 
-u = User.create username:"test", password:"testtest", email:"test@test.com", tlf: 928570666, name:"test", lastname:"Quevedo", role:2
-u.image = Rails.root.join("seedImages/avatar.jpg").open
-u.save!
+u1 = User.create username:"test1", password:"testtest", email:"test1@test.com", tlf: 928570666, name:"Cliente 1", lastname: "Quevedo", role: 1
+u1.image = Rails.root.join("seedImages/avatar.jpg").open
+u1.save!
+
+u2 = User.create username:"test2", password:"testtest", email:"test2@test.com", tlf: 928570666, name:"Dueño 1", lastname: "Santana", role: 2
+u2.image = Rails.root.join("seedImages/avatar.jpg").open
+u2.save!
+
+u3 = User.create username:"test3", password:"testtest", email:"test3@test.com", tlf: 928570666, name:"Admin 1", lastname: "Sánchez", role: 0
+u3.image = Rails.root.join("seedImages/avatar.jpg").open
+u3.save!
 
 loremDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit blandit dui imperdiet, habitant sociis duis a neque magnis "+
                     "fames ante quisque, posuere mauris pellentesque volutpat tincidunt tellus massa dapibus suspendisse. Molestie elementum "+
                     "arcu pretium habitasse consequat ornare nascetur hac nec, vivamus mollis fusce eu pellentesque potenti class dis ultrices "+
                     "eget, lacus nunc leo posuere taciti malesuada fermentum at. Habitant arcu dui euismod vulputate eleifend habitasse urna "+
                     "mi, varius nunc libero suscipit dapibus parturient ornare consequat, pulvinar sed suspendisse sagittis ante id sociis."
-
-
 
 restaurants = Restaurant.create [{name: "Bona Pizza", description:loremDescription, user_id: 1},
                        {name: "Casa Modesto", description:loremDescription, user_id: 1},
@@ -47,7 +53,6 @@ for i in 0..13
   photos[i].save!
 end
 
-
 dishes = Dish.create [{name: "Ensaladilla Rusa 1", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sit.", price:5.50, restaurant_id: 1},
                  {name: "Calamares fritos 1", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sit.", price:8, restaurant_id: 1},
                  {name: "Ensaladilla Rusa 2", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sit.", price:5.50, restaurant_id: 2},
@@ -71,7 +76,6 @@ for i in 0..13
   end
   dishes[i].save!
 end
-
 
 schedules = Schedule.create [{weekDay: 0, openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 1},
                      {weekDay: 1, openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 1},
