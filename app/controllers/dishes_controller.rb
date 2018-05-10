@@ -1,6 +1,7 @@
 class DishesController < ApplicationController
   before_action :set_dish, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, except: :destroy
+  before_action :set_restaurant
+  before_action :authenticate
 
   # GET /dishes
   # GET /dishes.json
@@ -25,7 +26,7 @@ class DishesController < ApplicationController
   def update
     respond_to do |format|
       if @dish.update(dish_params)
-        format.html { redirect_to [@restaurant, @dish], notice: 'Dish was successfully updated.' }
+        format.html { redirect_to restaurant_dishes_path, notice: 'Dish was successfully updated.' }
         format.json { render :show, status: :ok, location: @dish }
       else
         format.html { render :edit }
@@ -39,23 +40,29 @@ class DishesController < ApplicationController
   def destroy
     @dish.destroy
     respond_to do |format|
-      format.html { redirect_to restaurant_dishes_url, notice: 'Dish was successfully destroyed.' }
+      format.html { redirect_to restaurant_dishes_path, notice: 'Dish was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_dish
+  # Use callbacks to share common setup or constraints between actions.
+  def set_dish
       @dish = Dish.find(params[:id])
     end
 
-    def set_restaurant
+  def set_restaurant
       @restaurant = Restaurant.find(params[:restaurant_id])
     end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-    def dish_params
+  def dish_params
       params.require(:dish).permit(:name, :description, :price, :image)
     end
+
+  def authenticate
+    if !user_signed_in? || !@restaurant.belongsToUser?(current_user) || current_user.role == 1
+      redirect_to(@restaurant, alert: "No tiene permiso")
+    end
+  end
 end

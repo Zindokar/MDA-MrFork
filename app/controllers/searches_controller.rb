@@ -1,8 +1,14 @@
 class SearchesController < ApplicationController
 
+
   def index
     @cities = search_city_Combobox
     @food = search_food_Combobox
+
+
+    @allRestaurants = Restaurant.all
+
+
   end
 
   def search_city_Combobox

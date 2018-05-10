@@ -1,5 +1,11 @@
+<%= stylesheet_link_tag "restaurants.css" %>
 <h1>New Restaurant</h1>
 
 <%= render 'form', restaurant: @restaurant %>
 
-<%= link_to 'Back', restaurants_path %>
+<%=
+if current_user.role ==2
+  link_to 'Back', restaurants_path
+else
+  link_to 'Back', '/admin/control_panel'
+%>

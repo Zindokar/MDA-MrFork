@@ -1,27 +1,55 @@
-<%= form_with(model: [@restaurant, @restaurant.dishes.new], local: true) do |form| %>
+<%= stylesheet_link_tag "dishes.css" %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :dish_name %>
+<div class="container editHeader">
+  <div class="col-md-12">
+    <h1>Editar restaurante: <%= @restaurant.name %></h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="col-md-3">
+    <div class="list-group">
+      <%= link_to "Restaurante", edit_restaurant_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Información", edit_restaurant_address_path(@restaurant, @restaurant.address), :class => "list-group-item" %>
+      <%= link_to "Menú", restaurant_dishes_path(@restaurant), :class => "list-group-item active" %>
+      <%= link_to "Fotos", restaurant_photos_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Horarios", restaurant_schedules_path(@restaurant), :class => "list-group-item" %>
+      <%= link_to "Volver", restaurant_path(@restaurant), :class => "list-group-item list-group-item-danger" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :dish_description %>
-  </div>
+  <div class="col-md-9">
+    <%= form_with(model: [@restaurant, @restaurant.dishes.new], local: true) do |form| %>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price, id: :dish_price, step: :any %> €
-  </div>
+      <div class="field form-group">
+        <%= form.label "Nombre:" %>
+        <%= form.text_field :name, id: :dish_namem, :class=>"form-control" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image, id: :dish_image %>
-  </div>
+      <div class="field form-group">
+        <%= form.label "Descripción:" %>
+        <%= form.text_field :description, id: :dish_description, :class=>"form-control" %>
+      </div>
 
-  <div class="actions">
-    <%= form.submit %>
+      <div class="field form-group">
+        <%= form.label "Precio (en €):" %>
+        <%= form.number_field :price, id: :dish_price, step: :any, :class=>"form-control" %>
+      </div>
+
+      <div class="field form-group">
+        <%= form.label "Imagen" %>
+        <%= form.file_field :image, id: :dish_image %>
+      </div>
+
+      <br>
+
+      <div class="actions">
+        <%= link_to "Volver", restaurant_dishes_path, :class=>"btn btn-warning", "role" => "button" %>
+        <%= form.submit "Guardar", :class=>"btn btn-default" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
+
+
 

@@ -1,8 +1,63 @@
-<%= form_tag "searches/show", method: :get do %>
-  <%= text_field_tag :keyword, nil, placeholder: "Nombre, Calle, Código postal"%>
-  <%= select_tag "cityOption", options_for_select(@cities), prompt: "Ciudad" %>
-  <%= select_tag "foodOption", options_for_select(@food), prompt: "Tipo de comida" %>
-  <%= content_tag :button, type: :submit do %>
-    Buscar
-  <% end %>
-<% end %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
+
+<%= stylesheet_link_tag "searches.css" %>
+
+<br><br><br>
+<div class="container">
+  <div class="searchContainer">
+        <%= form_tag  "searches/show", :class=>"form-horizontal", :role=>"form", method: :get do %>
+        <div class="form-group">
+
+            <div class="col-lg-12">
+              <div class="input-group">
+                <%= text_field_tag :keyword,  nil, :class=>"form-control", placeholder: "Nombre, Calle, Código postal" %>
+                <%= select_tag "cityOption", options_for_select(@cities, :style=>"opacity: 1"), :class=>"selectpicker", prompt: "Ciudad" %>
+                <%= select_tag "foodOption", options_for_select(@food), :class=>"selectpicker", prompt: "Tipo de comida" %>
+                <span class="input-group-btn">
+                  <%= content_tag :button,  :class=>"btn btn-default", type: :submit do %>
+                   Buscar
+                  <% end %>
+                </span>
+
+              </div>
+            </div>
+
+        </div>
+      <% end %>
+  </div>
+
+</div>
+<br><br>
+
+
+
+  <br><br>
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Restaurantes</th>
+
+      <th>Tipo de comida</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @allRestaurants.each do |restaurant| %>
+          <tr>
+          <td><%= link_to restaurant.name, restaurant , {:class=>"textLink"} %></td>
+          <% t= restaurant.types %>
+
+          <% t.each do |t1| %>
+           <td><%= t1.name%></td>
+          <% end %>
+
+        </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+</div>
