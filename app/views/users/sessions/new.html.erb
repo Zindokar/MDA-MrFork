@@ -1,6 +1,4 @@
-
-<div class="container">
-  <div class="row main">
+<div class="row main">
     <div class="panel-heading">
       <div class="panel-title text-center">
         <h1 class="title text-primary">Mr. Fork</h1>
@@ -8,8 +6,9 @@
         <hr/>
       </div>
     </div>
-  </div>
-    <div class="form-horizontal text-center">
+</div>
+<div class="container">
+    <div class="form-horizontal col-md-offset-2 text-center">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="row">
         <div class="col-md-3 col-md-offset-3">
@@ -19,18 +18,18 @@
             <%= f.text_field :username, autofocus: true, autocomplete: "email", :class=>"form-control" %>
           </div>
 
-          <div class="form-group ">
+          <div class="form-group">
             <%= f.label "Contraseña" %><br />
             <%= f.password_field :password, autocomplete: "off", :class=>"form-control" %>
           </div>
 
           <% if devise_mapping.rememberable? -%>
-            <div class="form-group ">
+            <div class="form-group  ">
               <%= f.check_box :remember_me %>
               <%= f.label "Recuerdame" %>
             </div>
           <% end -%>
-          <div class="actions form-group">
+          <div class="actions form-group ">
             <%= f.submit "Iniciar sesión",:class=>"btn btn-success"  %>
           </div>
 
