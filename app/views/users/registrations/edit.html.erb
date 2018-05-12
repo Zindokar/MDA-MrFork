@@ -1,5 +1,5 @@
 
-<div class="container text-center">
+<div class="container">
   <div class="row main">
     <div class="panel-heading">
       <div class="panel-title text-center">
@@ -8,12 +8,16 @@
       </div>
     </div>
   </div>
-<div class="form-horizontal text-center">
+<div class="form-horizontal">
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
-  <div class="col-lg-6">
+  <div class="col-md-6 col-md-offset-3">
     <div clas="row">
+      <div class="form-group ">
+        <%= f.label "Image" %>
+        <%= f.file_field :image, :class => "form-control" %>
+      </div>
       <div class="form-group">
         <%= f.label :username %>
         <%= f.text_field :username, autofocus: true, autocomplete: "username",:class=>"form-control" %>
@@ -21,7 +25,7 @@
       <div class="form-group">
         <%= f.label "Teléfono" %>
         <% if 9 %>
-          <em>(<%= 9 %> characters needed)</em>
+          <em>(<%= 9 %> caracteres necesarios)</em>
         <% end %><br/>
         <%= f.text_field :tlf, autocomplete: "off" , :class=>"form-control"%>
       </div>
@@ -35,12 +39,13 @@
       <% end %>
 
       <div class="form-group">
+
         <%= f.label "Contraseña" %> <i>(Déjalo vacío si no quieres cambiarlo)</i>
-        <%= f.password_field :password, autocomplete: "off", :class=>"form-control" %>
         <% if @minimum_password_length %>
           <br/>
           <em><%= @minimum_password_length %> caracteres mínimo</em>
         <% end %>
+        <%= f.password_field :password, autocomplete: "off", :class=>"form-control" %>
       </div>
 
       <div class="form-group">
@@ -53,11 +58,11 @@
         <%= f.password_field :current_password, autocomplete: "off", :class=>"form-control" %>
       </div>
 
-      <div class="actions form-group">
+      <div class="actions form-group text-center">
         <%= f.submit "Actualizar", :class=>"btn btn-success" %>
       </div>
   <% end %>
-    <div>
+    <div class="form-group text-center">
       <h3 class="text-danger">¿Desea cancelar su cuenta? </h3>
       <p><%= button_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, :class=>"btn btn-danger " %></p>
     </div>
