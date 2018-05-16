@@ -1,0 +1,96 @@
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
+</head>
+
+<body>
+
+  <div class="panel panel-warning">
+    <div class="panel-heading">
+      <h1 class="panel-title text-center"><strong>Panel de control de administrador</strong></h1>
+    </div>
+
+    <div class="panel panel-body">
+      <div class="col-md-6 panel panel-default" id=manage_restaurants style="overflow-x:auto;">
+        <div class="panel panel-heading">
+          <h2 class="text-center panel-title"><strong>Restaurants</strong></h2>
+        </div>
+        <div/>
+
+        <div class="panel panel-body">
+          <table class = "table table-hover table-bordered table-responsive" id="restaurants_table">
+            <thead>
+              <tr>
+                <th class="text-center" >Nombre</th>
+                <th class="text-center">Localización</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @restaurants.each do |restaurant| %>
+              <tr>
+                <td class="text-center"><%= restaurant.name %></td>
+                <td class="text-center"><%= restaurant.address.city%></td>
+                <td class="text-center"><%= link_to 'Ver', restaurant %></td>
+                <td class="text-center"><%= link_to 'Editar', edit_restaurant_path(restaurant) %></td>
+                <td class="text-center"><%= link_to 'Eliminar', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <br>
+          <div align="center">
+            <%= link_to 'New Restaurant', new_restaurant_path, :class => "btn btn-warning" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 panel panel-default" id="manage_users" float="left">
+
+      <div class="panel panel-heading">
+        <h2 class="text-center panel-title"><strong>Usuarios</strong></h2>
+      </div>
+
+      <div class="panel panel-body">
+        <table id="user_table" style="overflow-x:auto;" class = "table table-hover table-bordered table-responsive">
+          <thead>
+            <tr>
+              <th class="text-center">Usuario</th>
+              <th class="text-center">email</th>
+              <th class="text-center">Rol</th>
+              <th class="text-center">Creado</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @users.each do |user| %>
+            <tr>
+              <td class="text-center"><%=user.username%></td>
+              <td class="text-center"><%=user.email%></td>
+              <td class="text-center"><%if user.role == 1%>
+                dueño
+                <%else%>
+                usuario
+                <%end%></td>
+                <td class="text-center"><%=user.created_at%></td>
+                <td class="text-center">
+                  <%=
+                  if user.id != current_user.id
+                    link_to 'Eliminar', user, method: :delete, data: { confirm: 'Are you sure?' }
+                  end
+                  %>
+                </td>
+
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>

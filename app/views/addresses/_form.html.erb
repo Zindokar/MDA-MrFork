@@ -1,0 +1,55 @@
+<%= form_for([@restaurant, @address]) do |form| %>
+  <% if @address.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@address.errors.count, "error") %> prohibited this address from being saved:</h2>
+
+      <ul>
+      <% @address.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field form-group">
+    <%= form.label "Calle:" %>
+    <%= form.text_field :street, id: :address_street, :class=>"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label "Ciudad:" %>
+    <%= form.text_field :city, id: :address_city, :class=>"form-control"  %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label "Código Postal:" %>
+    <%= form.number_field :postalCode, id: :address_postalCode, :class=>"form-control"  %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label "E-mail:" %>
+    <%= form.text_field :email, id: :email, :class=>"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label "Teléfono:" %>
+    <%= form.number_field :tlf, id: :address_tlf, :class=>"form-control"  %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :latitude %>
+    <%= form.number_field :latitude, id: :address_latitude, :class=>"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :longitude %>
+    <%= form.number_field :longitude, id: :address_longitude, :class=>"form-control" %>
+  </div>
+
+  <br>
+
+  <div class="actions">
+    <%= form.submit "Guardar cambios", :class=>"btn btn-default" %>
+  </div>
+<% end %>

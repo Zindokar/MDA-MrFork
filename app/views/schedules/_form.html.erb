@@ -1,0 +1,40 @@
+<%= form_with(model: [@restaurant, @schedule], local: true) do |form| %>
+  <% if schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
+
+      <ul>
+      <% schedule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <select name="schedule[weekDay]">
+      <option value="1">Lunes</option>
+      <option value="2">Martes</option>
+      <option value="3">Miércoles</option>
+      <option value="4">Jueves</option>
+      <option value="5">Viernes</option>
+      <option value="6">Sábado</option>
+      <option value="0">Domingo</option>
+    </select>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :openingTime %>
+    <%= form.time_select :openingTime, id: :schedule_openingTime %>
+  </div>
+
+  <div class="field">
+    <%= form.label :closingTime %>
+    <%= form.time_select :closingTime, id: :schedule_closingTime %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

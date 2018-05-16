@@ -1,0 +1,30 @@
+<%= stylesheet_link_tag "restaurants.css" %>
+<%= form_with(model: restaurant, local: true) do |form| %>
+  <% if restaurant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
+
+      <ul>
+      <% restaurant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label "Nombre:" %>
+    <%= form.text_field :name, id: :restaurant_name, :class=>"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label "Description:" %>
+    <%= form.text_area(:description,id: :restaurant_description, cols: 60, rows: 10, :class=>"form-control") %>
+  </div>
+
+  <br>
+
+  <div class="actions">
+    <%= form.submit "Guardar cambios",:class=>"btn btn-default"%>
+  </div>
+<% end %>

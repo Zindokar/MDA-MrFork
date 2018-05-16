@@ -1,0 +1,45 @@
+<%= stylesheet_link_tag "dishes.css" %>
+
+<%= form_with(model: [@restaurant, @dish], local: true, html: {multipart: true}) do |form| %>
+  <% if @dish.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dish.errors.count, "error") %> prohibited this dish from being saved:</h2>
+
+      <ul>
+      <% @dish.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field form-group">
+    <%= form.label "Nombre:" %>
+    <%= form.text_field :name, id: :dish_namem, :class=>"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label "Descripción:" %>
+    <%= form.text_field :description, id: :dish_description, :class=>"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label "Precio (en €):" %>
+    <%= form.number_field :price, id: :dish_price, step: :any, :class=>"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label "Imagen:" %>
+    <%= image_tag @dish.image.smallCarrusel, :class => "img-rounded" %>
+    <%= form.file_field :image, id: :dish_image %>
+  </div>
+
+  <br>
+
+  <div class="actions">
+    <%= link_to "Volver", restaurant_dishes_path, :class=>"btn btn-warning", "role" => "button" %>
+    <%= form.submit "Guardar cambios", :class=>"btn btn-default" %>
+  </div>
+<% end %>
+
