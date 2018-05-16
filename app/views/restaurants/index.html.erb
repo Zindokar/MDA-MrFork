@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<%= stylesheet_link_tag "restaurants.css" %>
 <h1>Restaurants</h1>
  <div style='width: 800px;'>
    <div id="map" style='width: 800px; height: 400px;'></div>
@@ -27,8 +26,6 @@
       <tr>
         <td><%= restaurant.name %></td>
         <td><%= link_to 'Show', restaurant %></td>
-        <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
-        <td><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

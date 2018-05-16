@@ -1,11 +1,12 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, except: :destroy
+  before_action :set_restaurant
+  before_action :authenticate
 
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = Address.all
+    @addresses = @restaurant.address
   end
 
   # GET /addresses/1
@@ -34,7 +35,7 @@ class AddressesController < ApplicationController
   def update
     respond_to do |format|
       if @address.update(address_params)
-        format.html { redirect_to [@restaurant, @address], notice: 'Address was successfully updated.' }
+        format.html { redirect_to edit_restaurant_address_path(@restaurant), notice: 'Address was successfully updated.' }
         format.json { render :show, status: :ok, location: @address }
       else
         format.html { render :edit }
@@ -65,6 +66,12 @@ class AddressesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def address_params
-    params.require(:address).permit(:street, :city, :postalCode, :email, :tlf, :restaurant_id)
+    params.require(:address).permit(:street, :city, :postalCode, :email, :tlf, :latitude, :longitude, :restaurant_id)
+  end
+
+  def authenticate
+    if !user_signed_in? || !@restaurant.belongsToUser?(current_user) || current_user.role == 1
+      redirect_to(@restaurant, alert: "No tiene permiso")
+    end
   end
 end

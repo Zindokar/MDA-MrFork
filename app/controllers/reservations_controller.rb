@@ -1,11 +1,16 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, :except => :destroy
+  before_action :set_restaurant, :except => [:destroy, :me]
 
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = Reservation.all
+    @reservations = @restaurant.reservations
+  end
+
+  def me
+    @reservations = Reservation.myReservations(current_user.id)
   end
 
   # GET /reservations/1
@@ -20,7 +25,7 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to [@restaurant, @reservation], notice: 'Reservation was successfully created.' }
+        format.html { redirect_to [@restaurant, @reservation], notice: 'Reserva creada correctamente.' }
         format.json { render :show, status: :created, location: @reservation }
       else
         format.html { render :new }
@@ -48,8 +53,12 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation.destroy
     respond_to do |format|
-      format.html { redirect_to restaurant_reservations_path, notice: 'Reservation was successfully destroyed.' }
-      format.json { head :no_content }
+      if user_signed_in? and current_user.role = 1
+        format.html { redirect_to '/reservations/me', notice: 'Reserva cancelada correctamente.'}
+      else
+        format.html { redirect_to restaurant_reservations_path, notice: 'Reserva destruida correctamente.' }
+        format.json { head :no_content }
+      end
     end
   end
 

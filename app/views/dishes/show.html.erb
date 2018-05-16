@@ -1,4 +1,11 @@
+<%= stylesheet_link_tag "dishes.css" %>
+
 <p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @dish.image %>
+</p>
 
 <p>
   <strong>Name:</strong>
@@ -8,6 +15,11 @@
 <p>
   <strong>Description:</strong>
   <%= @dish.description %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @dish.price %>
 </p>
 
 <%= link_to 'Edit', [:edit, @restaurant, @dish] %> |

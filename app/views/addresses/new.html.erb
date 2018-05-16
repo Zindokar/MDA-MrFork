@@ -1,28 +1,38 @@
 <%= form_with(model: [@restaurant, Address.new], local: true) do |form| %>
 
-  <div class="field">
-    <%= form.label :street %>
-    <%= form.text_field :street, id: :address_street %>
+  <div class="field form-group">
+    <%= form.label "Calle:" %>
+    <%= form.text_field :street, id: :address_street, :class=>"form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city, id: :address_city %>
+  <div class="field form-group">
+    <%= form.label "Ciudad:" %>
+    <%= form.text_field :city, id: :address_city, :class=>"form-control"  %>
   </div>
 
-  <div class="field">
-    <%= form.label :postalCode %>
-    <%= form.number_field :postalCode, id: :address_postalCode %>
+  <div class="field form-group">
+    <%= form.label "Código Postal:" %>
+    <%= form.number_field :postalCode, id: :address_postalCode, :class=>"form-control"  %>
   </div>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, id: :email%>
+  <div class="field form-group">
+    <%= form.label "E-mail:" %>
+    <%= form.text_field :email, id: :email, :class=>"form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :tlf %>
-    <%= form.number_field :tlf, id: :address_tlf %>
+  <div class="field form-group">
+    <%= form.label "Teléfono:" %>
+    <%= form.number_field :tlf, id: :address_tlf, :class=>"form-control"  %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :latitude %>
+    <%= form.number_field :latitude, id: :address_latitude, :class=>"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :longitude %>
+    <%= form.number_field :longitude, id: :address_longitude, :class=>"form-control" %>
   </div>
 
   <div class="field" hidden>
@@ -30,7 +40,8 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Guardar", :class=>"btn btn-default" %>
   </div>
+
 <% end %>
 

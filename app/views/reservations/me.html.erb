@@ -1,0 +1,28 @@
+<% if @reservations.count > 0 %>
+  <h1>Tus reservas</h1>
+  <p>
+  <table class="table table-striped">
+    <thead class="thead-light">
+    <th scope="col">Restaurante</th>
+    <th scope="col">Fecha reserva</th>
+    <th scope="col">Personas</th>
+    <th scope="col"></th>
+    </thead>
+    <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= link_to reservation.restaurant.name, reservation.restaurant %></td>
+        <td><%= reservation.date %></td>
+        <td><%= reservation.personCount %></td>
+        <td><%= link_to 'Cancelar reserva', [reservation.restaurant, reservation], method: :delete, class: 'btn btn-xs btn-danger', data: {confirm: '¿Está seguro?'} %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  </p>
+<% else %>
+  <h1>No tienes reservas</h1>
+  <p><%= link_to '¡Busca restaurantes y haz una reseva!', controller: 'searches', action: 'index' %></p>
+<% end %>
+
+

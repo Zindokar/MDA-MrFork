@@ -3,11 +3,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  # enum role: [:admin, :user, :owner]
+  # after_initialize :set_default_role, :if => :new_record?
 
-  # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+
+  def new
+    super
+  end
 
   # POST /resource
   # def create
@@ -15,9 +17,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+   def edit
+     super
+   end
 
   # PUT /resource
   # def update

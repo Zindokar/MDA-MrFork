@@ -7,17 +7,25 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'time'
 
-u = User.create username:"test", password:"testtest", email:"test@test.com", tlf:928570666, name:"test", lastname:"Quevedo"
+u = User.create username:"test", password:"testtest", email:"test@test.com", tlf: 928570666, name:"test", lastname:"Quevedo", role:2
 u.image = Rails.root.join("seedImages/avatar.jpg").open
 u.save!
 
-restaurants = Restaurant.create [{name: "Bona Pizza"},
-                       {name: "Casa Modesto"},
-                       {name: "Ca' Tita"},
-                       {name: "Casa del Pan"},
-                       {name: "Viña Cantera"},
-                       {name: "Cafetería Siroco"},
-                       {name: "Abrasa Grill"}]
+loremDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit blandit dui imperdiet, habitant sociis duis a neque magnis "+
+                    "fames ante quisque, posuere mauris pellentesque volutpat tincidunt tellus massa dapibus suspendisse. Molestie elementum "+
+                    "arcu pretium habitasse consequat ornare nascetur hac nec, vivamus mollis fusce eu pellentesque potenti class dis ultrices "+
+                    "eget, lacus nunc leo posuere taciti malesuada fermentum at. Habitant arcu dui euismod vulputate eleifend habitasse urna "+
+                    "mi, varius nunc libero suscipit dapibus parturient ornare consequat, pulvinar sed suspendisse sagittis ante id sociis."
+
+
+
+restaurants = Restaurant.create [{name: "Bona Pizza", description:loremDescription, user_id: 1},
+                       {name: "Casa Modesto", description:loremDescription, user_id: 1},
+                       {name: "Ca' Tita", description:loremDescription, user_id: 1},
+                       {name: "Casa del Pan", description:loremDescription, user_id: 1},
+                       {name: "Viña Cantera", description:loremDescription, user_id: 1},
+                       {name: "Cafetería Siroco", description:loremDescription, user_id: 1},
+                       {name: "Abrasa Grill", description:loremDescription, user_id: 1}]
 
 photos = Photo.create [{restaurant_id:1},
                        {restaurant_id:1},
@@ -57,40 +65,40 @@ dishes = Dish.create [{name: "Ensaladilla Rusa 1", description: "Lorem ipsum dol
 
 for i in 0..13
   if i % 2 == 0
-    dishes[i].image = Rails.root.join("seedImages/ensaladilla.jpeg").open
+    dishes[i].image = Rails.root.join("seedImages/ensaladilla.jpg").open
   else
-    dishes[i].image = Rails.root.join("seedImages/calamares.jpeg").open
+    dishes[i].image = Rails.root.join("seedImages/calamares.jpg").open
   end
   dishes[i].save!
 end
 
 
-schedules = Schedule.create [{weekDay: "lunes", openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 1},
-                     {weekDay: "martes", openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 1},
-                     {weekDay: "miércoles", openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 1},
-                     {weekDay: "jueves", openingTime: Time.zone.parse('2018-01-01 09:00'), closingTime: Time.zone.parse('2018-01-01 22:00'), restaurant_id: 2},
-                     {weekDay: "viernes", openingTime: Time.zone.parse('2018-01-01 09:00'), closingTime: Time.zone.parse('2018-01-01 22:00'), restaurant_id: 2},
-                     {weekDay: "sábado", openingTime: Time.zone.parse('2018-01-01 09:00'), closingTime: Time.zone.parse('2018-01-01 22:00'), restaurant_id: 2},
-                     {weekDay: "domingo", openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 23:00'), restaurant_id: 3},
-                     {weekDay: "lunes", openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 23:00'), restaurant_id: 3},
-                     {weekDay: "martes", openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 23:00'), restaurant_id: 3},
-                     {weekDay: "miércoles", openingTime: Time.zone.parse('2018-01-01 12:00'), closingTime: Time.zone.parse('2018-01-01 19:00'), restaurant_id: 4},
-                     {weekDay: "jueves", openingTime: Time.zone.parse('2018-01-01 12:00'), closingTime: Time.zone.parse('2018-01-01 19:00'), restaurant_id: 4},
-                     {weekDay: "viernes", openingTime: Time.zone.parse('2018-01-01 12:00'), closingTime: Time.zone.parse('2018-01-01 19:00'), restaurant_id: 4},
-                     {weekDay: "sábado", openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 18:00'), restaurant_id: 5},
-                     {weekDay: "domingo", openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 18:00'), restaurant_id: 5},
-                     {weekDay: "lunes", openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 18:00'), restaurant_id: 5},
-                     {weekDay: "martes", openingTime: Time.zone.parse('2018-01-01 14:30'), closingTime: Time.zone.parse('2018-01-01 18:00'), restaurant_id: 6},
-                     {weekDay: "miércoles", openingTime: Time.zone.parse('2018-01-01 14:30'), closingTime: Time.zone.parse('2018-01-01 18:00'), restaurant_id: 6},
-                     {weekDay: "jueves", openingTime: Time.zone.parse('2018-01-01 14:30'), closingTime: Time.zone.parse('2018-01-01 18:00'), restaurant_id: 6},
-                     {weekDay: "viernes", openingTime: Time.zone.parse('2018-01-01 10:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 7},
-                     {weekDay: "sábado", openingTime: Time.zone.parse('2018-01-01 10:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 7},
-                     {weekDay: "domingo", openingTime: Time.zone.parse('2018-01-01 10:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 7}]
+schedules = Schedule.create [{weekDay: 0, openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 1},
+                     {weekDay: 1, openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 1},
+                     {weekDay: 2, openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 1},
+                     {weekDay: 3, openingTime: Time.zone.parse('2018-01-01 09:00'), closingTime: Time.zone.parse('2018-01-01 22:00'), restaurant_id: 2},
+                     {weekDay: 4, openingTime: Time.zone.parse('2018-01-01 09:00'), closingTime: Time.zone.parse('2018-01-01 22:00'), restaurant_id: 2},
+                     {weekDay: 5, openingTime: Time.zone.parse('2018-01-01 09:00'), closingTime: Time.zone.parse('2018-01-01 22:00'), restaurant_id: 2},
+                     {weekDay: 6, openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 23:00'), restaurant_id: 3},
+                     {weekDay: 0, openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 23:00'), restaurant_id: 3},
+                     {weekDay: 1, openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 23:00'), restaurant_id: 3},
+                     {weekDay: 2, openingTime: Time.zone.parse('2018-01-01 12:00'), closingTime: Time.zone.parse('2018-01-01 19:00'), restaurant_id: 4},
+                     {weekDay: 3, openingTime: Time.zone.parse('2018-01-01 12:00'), closingTime: Time.zone.parse('2018-01-01 19:00'), restaurant_id: 4},
+                     {weekDay: 4, openingTime: Time.zone.parse('2018-01-01 12:00'), closingTime: Time.zone.parse('2018-01-01 19:00'), restaurant_id: 4},
+                     {weekDay: 5, openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 18:00'), restaurant_id: 5},
+                     {weekDay: 6, openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 18:00'), restaurant_id: 5},
+                     {weekDay: 0, openingTime: Time.zone.parse('2018-01-01 08:00'), closingTime: Time.zone.parse('2018-01-01 18:00'), restaurant_id: 5},
+                     {weekDay: 1, openingTime: Time.zone.parse('2018-01-01 14:30'), closingTime: Time.zone.parse('2018-01-01 18:00'), restaurant_id: 6},
+                     {weekDay: 2, openingTime: Time.zone.parse('2018-01-01 14:30'), closingTime: Time.zone.parse('2018-01-01 18:00'), restaurant_id: 6},
+                     {weekDay: 3, openingTime: Time.zone.parse('2018-01-01 14:30'), closingTime: Time.zone.parse('2018-01-01 18:00'), restaurant_id: 6},
+                     {weekDay: 4, openingTime: Time.zone.parse('2018-01-01 10:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 7},
+                     {weekDay: 5, openingTime: Time.zone.parse('2018-01-01 10:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 7},
+                     {weekDay: 6, openingTime: Time.zone.parse('2018-01-01 10:00'), closingTime: Time.zone.parse('2018-01-01 20:00'), restaurant_id: 7}]
 
-reservations = Reservation.create [{personCount: 5, date: Date.today, description:"Alergia al agua" ,restaurant_id: 1, user_id:1},
-                                   {personCount: 5, date: Date.today, description:"Es un cumpleaños, quiero tarta" ,restaurant_id: 1, user_id:1},
-                                   {personCount: 2, date: Date.today, description:"Preferible mesa en ventana mirando a la torre Eifel" ,restaurant_id: 2, user_id:1},
-                                   {personCount: 15, date: Date.today, description:"Fumadores" ,restaurant_id: 5, user_id:1}]
+reservations = Reservation.create [{personCount: 5, date: Time.now, description:"Alergia al agua" ,restaurant_id: 1, user_id:1},
+                                   {personCount: 5, date: Time.now, description:"Es un cumpleaños, quiero tarta" ,restaurant_id: 2, user_id:1},
+                                   {personCount: 2, date: Time.now, description:"Preferible mesa en ventana mirando a la torre Eifel" ,restaurant_id: 3, user_id:1},
+                                   {personCount: 15, date: Time.now, description:"Fumadores" ,restaurant_id: 4, user_id:1}]
 
 addresses = Address.create [{street: "Batalla del Ebro, 39", city: "Las Palmas", postalCode: "35013", tlf:922000001,
                                               email:"rest1@test.com", latitude:27.9933882, longitude:-15.4213781, restaurant_id: 1},
