@@ -17,4 +17,4 @@
 	- JQuery
 
 ### Realizado por: Sarah, Cynthia, Tomás, Jorge, Miki y Alex
-
+### Lo guardo como recuerdo de la Universidad (L)
